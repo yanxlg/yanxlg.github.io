@@ -1,0 +1,22 @@
+#body-wrap .label {
+  display: inline;
+  padding: 0 2px;
+}
+#body-wrap .label.default {
+  background: $label-default;
+}
+#body-wrap .label.primary {
+  background: $label-primary;
+}
+#body-wrap .label.info {
+  background: $label-info;
+}
+#body-wrap .label.success {
+  background: $label-success;
+}
+#body-wrap .label.warning {
+  background: $label-warning;
+}
+#body-wrap .label.danger {
+  background: $label-danger;
+}

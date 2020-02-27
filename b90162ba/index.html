@@ -1,0 +1,79 @@
+<!DOCTYPE html><html lang="zh-cn"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><title>RN 真机调试 | yanxlg@blog</title><meta name="description" content="RN 真机调试"><meta name="keywords" content=""><meta name="author" content="yanxlg"><meta name="copyright" content="yanxlg"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><meta http-equiv="x-dns-prefetch-control" content="on"><link rel="canonical" href="https://yanxlg.github.io/b90162ba/"><meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="RN 真机调试"><meta name="twitter:description" content="RN 真机调试"><meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png"><meta property="og:type" content="article"><meta property="og:title" content="RN 真机调试"><meta property="og:url" content="https://yanxlg.github.io/b90162ba/"><meta property="og:site_name" content="yanxlg@blog"><meta property="og:description" content="RN 真机调试"><meta property="og:image" content="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="prev" title="mobile click 300-350ms" href="https://yanxlg.github.io/8e448d63/"><link rel="next" title="RN Long List" href="https://yanxlg.github.io/9b9cdea5/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  highlight_copy: 'true',
+  highlight_lang: 'true',
+  highlight_shrink: 'false',
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  bookmark: {
+    title: 'Bookmark',
+    message_prev: 'Press',
+    message_next: 'to bookmark this page'
+  },
+  runtime_unit: 'days',
+  copyright: {"languages":{"author":"Author: yanxlg","link":"Link: https://yanxlg.github.io/b90162ba/","source":"Source: yanxlg@blog","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  copy_copyright_js: true
+  
+}</script></head><body><div id="header"> <div id="page-header"><span class="pull-left" id="blog_name"><a class="blog_title" id="site-name" href="/">yanxlg@blog</a></span><i class="fa fa-bars fa-fw toggle-menu pull-right close" aria-hidden="true"></i><span class="pull-right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></span><span class="pull-right" id="search_button"></span></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="lozad avatar_img" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/Photo/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'"></div><div class="mobile_post_data"><div class="mobile_data_item is_center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">44</div></a></div></div><div class="mobile_data_item is_center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">50</div></a></div></div><div class="mobile_data_item is_center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">Categories</div><div class="length_num">21</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> Music</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> Movie</span></a></li></ul></div><script>document.body.addEventListener('touchstart', function(){ });</script></div></div></div><div id="body-wrap"><div id="content-outer"><div id="top-container" style="background-image: url(https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png)"><div id="post-info"><div id="post-title"><div class="posttitle">RN 真机调试</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar" aria-hidden="true"></i> Created 2019-09-26<span class="post-meta__separator">|</span><i class="fa fa-history" aria-hidden="true"></i> Updated 2020-02-27</time><span class="post-meta__separator mobile_hidden">|</span><span class="mobile_hidden"><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/ReactNative/">ReactNative</a></span><div class="post-meta-wordcount"><span>Word count: </span><span class="word-count">740</span><span class="post-meta__separator">|</span><span>Reading time: 2 min</span><span class="post-meta__separator">|</span><span>Post View: </span><span id="busuanzi_value_page_pv"></span></div></div></div></div><div class="layout layout_post" id="content-inner"><article id="post"><div class="article-container" id="post-content"><p> React-Native项目在Android真机上调试？接下来直奔主题，通过USB将手机和电脑连接，打开手机上的USB调试。不通型号的手机可能设置方式不一样，这里具体不在细说……</p>
+<ol>
+<li>确保你的设备已经成功连接。可以终端输入adb devices来查看:<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ adb devices</span><br><span class="line"></span><br><span class="line">List of devices attached</span><br><span class="line"></span><br><span class="line"><span class="string">"Your device Name"</span> device</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ol>
+<p>注意：为避免调试出现其他问题，此处只需有一台设备连接，如果模拟器打开需要关闭模拟器；</p>
+<ol start="2">
+<li>终端运行npm start 开启本地服务，成功后运行react-native run-android来在设备上安装并启动应用，或者VSCode等编辑器进行Debug Android</li>
+</ol>
+<p>应用成果安装后不出意外的话会提示无法连接服务器，如下图：<br>   <img class="img-left lozad" data-src="/b90162ba/6463111-2e92fdace8995f6a.webp"><br>   <img class="img-left lozad" data-src="/b90162ba/6463111-e6e0e9d7e30f7e26.webp"></p>
+<p>出现此问题是因为我们未给手机设置访问开发服务地址，模拟器是直接访问电脑本地服务，真机则需要我们手动配置</p>
+<ol start="3">
+<li><p>设置设备访问开发服务器</p>
+<ul>
+<li><p>(Android 5.0及以上)使用adb reverse命令</p>
+<ul>
+<li><p>运行adb reverse tcp:8081 tcp:8081</p>
+</li>
+<li><p>不需要更多配置，你就可以使用Reload JS和其它的开发选项了。</p>
+</li>
+</ul>
+</li>
+<li><p>(Android 5.0以下)通过Wi-Fi连接你的本地开发服务器</p>
+<ul>
+<li><p>首先确保你的电脑和手机设备在同一个Wi-Fi环境下。</p>
+</li>
+<li><p>在设备上运行你的React Native应用。和打开其它App一样操作。</p>
+</li>
+<li><p>你应该会看到一个“红屏”错误提示。这是正常的，下面的步骤会解决这个报错。</p>
+</li>
+<li><p>摇晃设备，或者运行adb shell input keyevent 82，可以打开开发者菜单。</p>
+</li>
+<li><p>点击进入Dev Settings。</p>
+</li>
+<li><p>点击Debug server host for device。</p>
+</li>
+<li><p>输入你电脑的IP地址和端口号（电脑网络IP:8081）。查看电脑IP这里就不用多说啦。</p>
+</li>
+<li><p>回到开发者菜单然后选择Reload JS。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p>备注：理想状态下已经可以看到APP页面了，但是，如果上面步骤都已经做好，并且电脑本地服务终端已显示加载成功，但是APP的页面还未加载出来，显示白屏状态！是我们的步骤有问题？这里并不是我们的步骤有问题，此时只需要退出正在运行的APP，重新打开即可，就可以成功加载到APP页面啦！</p>
+</li>
+<li><p>调试<br>摇晃手机打开app的开发菜单，可以看到有两个选项，一个是Enable live reload另一个是Enable hot reloading。Enable live reload表示刷新时全局刷新,而hot reloading是局部刷新。这两个我们都选择允许后，我们改完代码并保存，可以实时看到修改效果，不用重新编译运行或者 reload。</p>
+<img class="img-left lozad" data-src="/b90162ba/5146067-7aabe3ae51b7f0a6.png">
+<p>在 app 设置 菜单中选择 Debug JS Remotely，同时PC端打开localhost:8081/debugger-ui 页面即可查看控制台，并且可以在debuggerWorker.js中设置断点进行调试</p>
+</li>
+</ol>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined" target="_blank" rel="noopener">yanxlg</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://yanxlg.github.io/b90162ba/">https://yanxlg.github.io/b90162ba/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js@1.0.16/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button"><i class="fa fa-qrcode"></i> Donate<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/wechat.jpg"><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lozad post-qr-code__img" src="/img/alipay.jpg"><div class="post-qr-code__desc">支付宝</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull-left"><a href="/8e448d63/"><img class="prev_cover lozad" data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">Previous Post</div><div class="prev_info"><span>mobile click 300-350ms</span></div></a></div><div class="next-post pull-right"><a href="/9b9cdea5/"><img class="next_cover lozad" data-src="https://cdn.jsdelivr.net/gh/jerryc127/CDN@latest/cover/default_bg.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">Next Post</div><div class="next_info"><span>RN Long List</span></div></a></div></nav></div></div><footer><div id="footer"><div class="copyright">&copy;2018 - 2020 By yanxlg</div><div class="framework-info"><span>Driven </span><a href="http://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="Read Mode"></i><i class="fa fa-plus" id="font_plus" title="Increase font size"></i><i class="fa fa-minus" id="font_minus" title="Decrease font size"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" target="_blank" rel="noopener" title="Traditional Chinese and Simplified Chinese Conversion">繁</a><i class="nightshift fa fa-moon-o" id="nightshift" title="Dark Mode"></i></div><div id="rightside-config-show"><div id="rightside_config" title="Setting"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="Scroll to comment"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-arrow-up" id="go-up" title="Back to top" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/performance.js"></script><script src="/js/nightshift.js"></script><script color="0,0,255" opacity="0.7" zIndex="-1" count="99" src="https://cdn.jsdelivr.net/gh/jerryc127/CDN/js/canvas-nest.js"></script><script src="/js/tw_cn.js"></script><script>translateInitilization()
+
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@1.2.2/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script>const observer = lozad(); // lazy loads elements with default selector as '.lozad'
+observer.observe();
+</script></body></html>
