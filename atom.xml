@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://yanxlg.github.io/"/>
-  <updated>2020-03-17T01:52:06.915Z</updated>
+  <updated>2020-03-17T01:52:40.663Z</updated>
   <id>https://yanxlg.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://yanxlg.github.io/518e617c/"/>
     <id>https://yanxlg.github.io/518e617c/</id>
     <published>2020-03-17T01:48:45.000Z</published>
-    <updated>2020-03-17T01:52:06.915Z</updated>
+    <updated>2020-03-17T01:52:40.663Z</updated>
     
     <content type="html"><![CDATA[<h2 id="引导"><a href="#引导" class="headerlink" title="引导"></a>引导</h2><p>在开发过程中，我们最常用的团队协同工具就是git，因此git常用操作必须要熟练掌握</p><ol><li>多个git仓库推送：在公司开发或者个人开发一个模块，如果需要同步到个人或者公司的git仓库，这时候就显得尤其重要<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git remote set-url --add origin git@gitee.com:teamemory/myH5.git   //给origin添加一个远程push地址，这样一次push就能同时push到两个地址上面</span><br><span class="line">git remote -v //查看是否多了一条push地址（这个可不执行）</span><br><span class="line">git push origin master -f // 推送到仓库</span><br><span class="line"></span><br><span class="line">git remote set-url --delete origin git@gitee.com:teamemory/myH5.git   // 删除方法</span><br></pre></td></tr></table></figure></li></ol>]]></content>
     
