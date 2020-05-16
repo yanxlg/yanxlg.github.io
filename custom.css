@@ -1,0 +1,19 @@
+.blog-icon{
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    background-size: contain!important;
+    vertical-align: middle;
+}
+
+.icon-react{
+    background: url(/icons/react.svg) no-repeat center;
+}
+
+.icon-vue{
+    background: url(/icons/vue.svg) no-repeat center;
+}
+
+.icon-node{
+    background: url(/icons/nodejs.svg) no-repeat center;
+}

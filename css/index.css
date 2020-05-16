@@ -3499,11 +3499,11 @@ blockquote footer cite:before {
 }
 #article-container.post-content ol li:hover:before,
 #article-container.post-content ul li:hover:before {
-  -webkit-transform: rotate(360deg);
-  -moz-transform: rotate(360deg);
-  -o-transform: rotate(360deg);
-  -ms-transform: rotate(360deg);
-  transform: rotate(360deg);
+  -webkit-transform: none;
+  -moz-transform: none;
+  -o-transform: none;
+  -ms-transform: none;
+  transform: none;
 }
 #article-container.post-content ol li:before,
 #article-container.post-content ul li:before {
