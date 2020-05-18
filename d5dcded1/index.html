@@ -117,7 +117,7 @@ function activateLightMode(){
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">workbox.routing.registerNavigationRoute(<span class="string">'/index.html'</span>);</span><br></pre></td></tr></table></figure></li>
 <li><p>registerRoute(capture:string|RegExp|Function, handler, method)：轻松注册<code>string</code>、<code>RegExp</code>、<code>func</code>路由</p>
 <figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">workbox.routing.registerRoute(<span class="regexp">/\/api\//</span>, workbox.strategies.networkFirst());</span><br></pre></td></tr></table></figure></li>
-<li><p>setCatchHandler(handler:(response:Promise<any>)=&gt;void)：路由抛错回调函数</p>
+<li><p>setCatchHandler(handler:(response:Promise<any>)=&gt;void)：路由抛错回调函数</any></p>
 </li>
 <li><p>setDefaultHandler(handler)：定义没有路由匹配时，默认处理程序，默认无匹配则直接请求网络，跟无sw一样</p>
 </li>

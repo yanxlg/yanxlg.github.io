@@ -105,7 +105,7 @@ function activateLightMode(){
 <li>支持跨域缓存，可以缓存其他域名下的资源</li>
 <li>支持通配符，可以对其他文件进行全部缓存或不缓存配置</li>
 </ul>
-<h2 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h2><p> 到这里，application cache 基本使用就已经结束了，打开网站会发现第一次访问时在浏览器请求资源的同时，application cache也再次请求需要被缓存的资源，并缓存到浏览器缓存区中。再次访问时页面资源完全从本地读取，Network中会发现资源的Size列显示（disk cache）：<br> <img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/58a73389/from_cache.png" class="img-left" title="load from cache generator style"><br> 资源无需从服务器下载，速度非常快，感觉非常美滋滋~</p>
+<h2 id="体验"><a href="#体验" class="headerlink" title="体验"></a>体验</h2><p> 到这里，application cache 基本使用就已经结束了，打开网站会发现第一次访问时在浏览器请求资源的同时，application cache也再次请求需要被缓存的资源，并缓存到浏览器缓存区中。再次访问时页面资源完全从本地读取，Network中会发现资源的Size列显示（disk cache）：<br> <img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/.cn//from_cache.png" class="img-left" title="load from cache generator style"><br> 资源无需从服务器下载，速度非常快，感觉非常美滋滋~</p>
 <h2 id="There-are-pits-everywhere"><a href="#There-are-pits-everywhere" class="headerlink" title="There are pits everywhere"></a>There are pits everywhere</h2><p> 如果到此处你以为就完了那你就真的完了，犹如标题一样，受<a href="#更新机制">更新机制</a>影响，你会发现到处都是坑：</p>
 <ul>
 <li>配置application cache的html文件必定会被缓存，以后当html发生改变时不会立即生效，甚至永远不会生效，如果只想缓存css、js、png等静态资源而不想缓存html，目前来说是个大坑</li>
