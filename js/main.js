@@ -257,7 +257,7 @@ $(function () {
     const isHighlightShrink = GLOBAL_CONFIG.highlightShrink
 
     if (isHighlightCopy || isHighlightLang || isHighlightShrink !== 'none') {
-      $figureHighlight.wrap('<div class="code-area-wrap"></div>').before('<div class="highlight-tools"></div>')
+      $figureHighlight.wrap('<div class="code-area-wrap"></div>').before('<div class="mac"><div class="one"></div><div class="two"></div><div class="three"></div></div><div class="highlight-tools"></div>')
     }
 
     /**

@@ -1,3 +1,12 @@
+@font-face {
+    font-family: 'blog';  /* project id 1823017 */
+    src: url('//at.alicdn.com/t/font_1823017_n1bi5eiqhm.eot');
+    src: url('//at.alicdn.com/t/font_1823017_n1bi5eiqhm.eot?#iefix') format('embedded-opentype'),
+    url('//at.alicdn.com/t/font_1823017_n1bi5eiqhm.woff2') format('woff2'),
+    url('//at.alicdn.com/t/font_1823017_n1bi5eiqhm.woff') format('woff'),
+    url('//at.alicdn.com/t/font_1823017_n1bi5eiqhm.ttf') format('truetype'),
+    url('//at.alicdn.com/t/font_1823017_n1bi5eiqhm.svg#blog') format('svg');
+}
 .blog-icon{
     display: inline-block;
     width: 18px;
@@ -16,4 +25,171 @@
 
 .icon-node{
     background: url(/icons/nodejs.svg) no-repeat center;
+}
+
+#post #article-container.post-content ol > li:before{
+    color: #49b1f5!important;
+    font-style: italic;
+    font-size: 1rem;
+    content: ""counter(li)"."!important;
+    background: none!important;
+}
+
+#post #article-container.post-content ol>li:hover::before{
+    color: #ff7242!important;
+}
+
+
+#page #article-container ol{
+    counter-reset:li 0;
+    list-style: none;
+}
+#page #article-container ol>li{
+    padding: 0.1rem 0.5rem 0.1rem 1.5rem!important;
+}
+#page #article-container ol>li:before{
+    color: #49b1f5!important;
+    font-style: italic;
+    font-size: 1rem;
+    content: ""counter(li)"."!important;
+    background: none!important;
+    padding-right: 0.3rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    margin-top: 0.2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    counter-increment: li;
+    text-align: center;
+    line-height: 1.2rem;
+}
+
+#page #article-container ol>li:hover::before{
+    color: #ff7242!important;
+}
+
+#page #article-container ul>li::before,#post #article-container.post-content ul > li:before{
+    content:'\e6f0';
+    width: 1.2rem;
+    height: 1.2rem;
+    position: absolute;
+    font-family: 'blog';
+    font-size: 1rem;
+    left: 0;
+    top: 0;
+    cursor: pointer;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    -o-transition: all 0.3s ease-out;
+    -ms-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+    margin-top: 0.2rem;
+    line-height: 1.2rem;
+    color: #49b1f5;
+    margin-left: 0;
+    border: none;
+}
+
+#page #article-container ul>li:hover::before,#post #article-container.post-content ul > li:hover::before{
+    color: #ff7242;
+}
+
+#page #article-container ul>li{
+    padding: 0.1rem 0.5rem 0.1rem 1.5rem!important;
+}
+
+#page #article-container ul,#post #article-container.post-content ul{
+    list-style: none;
+    padding: 0 0 0 0.8rem;
+    list-style: none;
+}
+
+#page #article-container ul>li ul>li::before,#post #article-container.post-content ul>li ul>li::before{
+    content:'\e61c';
+}
+
+.code-area-wrap>.mac{
+    position: absolute;
+    left: 0;
+    width: 5rem;
+    height: 1.4rem;
+    z-index: 10;
+}
+.code-area-wrap>.mac>.one{
+    position: absolute;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: #fc625d;
+    width: 0.6rem;
+    height: 0.6rem;
+    left: 1rem;
+    top: 0.4rem;
+    box-shadow: none!important;
+    z-index: 2;
+    cursor: pointer;
+}
+.code-area-wrap>.mac>.three{
+    position: absolute;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: #35cd4b;
+    width: 0.6rem;
+    height: 0.6rem;
+    left: 3rem;
+    top: 0.4rem;
+    box-shadow: none!important;
+    z-index: 2;
+    cursor: pointer;
+}
+.code-area-wrap>.mac>.two{
+    position: absolute;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+    background: #fdbc40;
+    width: 0.6rem;
+    height: 0.6rem;
+    left: 2rem;
+    top: 0.4rem;
+    box-shadow: none!important;
+    z-index: 2;
+    cursor: pointer;
+}
+.code-area-wrap>.mac:hover>.one{
+    background-image: url(/icons/close.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0.3rem;
+}
+
+.code-area-wrap>.mac:hover>.three{
+    background-image: url(/icons/full.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0.5rem;
+}
+
+.code-area-wrap>.mac:hover>.two{
+    background-image: url(/icons/min.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 0.5rem;
+}
+
+.code-min .highlight{
+    display: none!important;
+}
+.code-min .highlight-tools{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#article-container pre .comment {
+    color: #7a7a7a!important;
 }
