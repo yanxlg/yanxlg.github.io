@@ -193,3 +193,11 @@
 #article-container pre .comment {
     color: #7a7a7a!important;
 }
+
+.gt-svg{
+    vertical-align: middle!important;
+    line-height: 1em;
+}
+.gt-ico-text{
+    vertical-align: middle!important;
+}
