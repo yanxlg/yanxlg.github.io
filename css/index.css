@@ -4895,6 +4895,16 @@ figure.gallery-group .gallery-group-name:after {
 [data-theme='dark'] .mermaid {
   filter: brightness(0.7);
 }
+[data-theme='dark'] #gitalk-container .gt-header-textarea,
+[data-theme='dark'] #gitalk-container .gt-header-preview,
+[data-theme='dark'] #gitalk-container .gt-comment-content,
+[data-theme='dark'] #gitalk-container button,
+[data-theme='dark'] #gitalk-container .gt-popup {
+  filter: brightness(0.7);
+}
+[data-theme='dark'] #gitalk-container svg {
+  fill: rgba(255,255,255,0.6) !important;
+}
 [data-theme='dark'] #local-search {
   background: #121212;
 }
