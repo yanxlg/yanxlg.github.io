@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://blog.yanxlg.cn/vue/index.html</loc>
+    <lastmod>2020-05-27</lastmod>
+  </url>  <url>
+    <loc>https://blog.yanxlg.cn/react/debug/index.html</loc>
+    <lastmod>2020-05-27</lastmod>
+  </url>  <url>
+    <loc>https://blog.yanxlg.cn/h5/permission.html</loc>
+    <lastmod>2020-05-27</lastmod>
+  </url>  <url>
+    <loc>https://blog.yanxlg.cn/396e831/</loc>
+    <lastmod>2020-05-27</lastmod>
+  </url>  <url>
     <loc>https://blog.yanxlg.cn/dee17c46/</loc>
     <lastmod>2020-05-27</lastmod>
   </url>  <url>
@@ -9,9 +21,6 @@
   </url>  <url>
     <loc>https://blog.yanxlg.cn/react/hooks/index.html</loc>
     <lastmod>2020-05-25</lastmod>
-  </url>  <url>
-    <loc>https://blog.yanxlg.cn/react/debug/index.html</loc>
-    <lastmod>2020-05-23</lastmod>
   </url>  <url>
     <loc>https://blog.yanxlg.cn/nodejs/ioc/index.html</loc>
     <lastmod>2020-05-21</lastmod>
@@ -121,9 +130,6 @@
     <loc>https://blog.yanxlg.cn/518e617c/</loc>
     <lastmod>2020-05-10</lastmod>
   </url>  <url>
-    <loc>https://blog.yanxlg.cn/396e831/</loc>
-    <lastmod>2020-05-10</lastmod>
-  </url>  <url>
     <loc>https://blog.yanxlg.cn/3452590/</loc>
     <lastmod>2020-05-10</lastmod>
   </url>  <url>
@@ -139,10 +145,10 @@
     <loc>https://blog.yanxlg.cn/92faf83c/</loc>
     <lastmod>2020-05-10</lastmod>
   </url>  <url>
-    <loc>https://blog.yanxlg.cn/f0e261b6/</loc>
+    <loc>https://blog.yanxlg.cn/59f37da9/</loc>
     <lastmod>2020-02-27</lastmod>
   </url>  <url>
-    <loc>https://blog.yanxlg.cn/59f37da9/</loc>
+    <loc>https://blog.yanxlg.cn/f0e261b6/</loc>
     <lastmod>2020-02-27</lastmod>
   </url>  <url>
     <loc>https://blog.yanxlg.cn/e06277db/</loc>

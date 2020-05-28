@@ -2,6 +2,48 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://blog.yanxlg.cn/vue/index.html</loc>
+    
+    <lastmod>2020-05-27T10:03:48.649Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.yanxlg.cn/react/debug/index.html</loc>
+    
+    <lastmod>2020-05-27T08:23:32.178Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.yanxlg.cn/h5/eboard.html</loc>
+    
+    <lastmod>2020-05-27T08:21:00.385Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.yanxlg.cn/h5/editor+.html</loc>
+    
+    <lastmod>2020-05-27T08:20:29.726Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.yanxlg.cn/h5/permission.html</loc>
+    
+    <lastmod>2020-05-27T08:20:10.508Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.yanxlg.cn/396e831/</loc>
+    
+    <lastmod>2020-05-27T07:57:45.739Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://blog.yanxlg.cn/dee17c46/</loc>
     
     <lastmod>2020-05-27T07:53:18.052Z</lastmod>
@@ -26,13 +68,6 @@
     <loc>https://blog.yanxlg.cn/deno/index.html</loc>
     
     <lastmod>2020-05-25T03:59:02.123Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.yanxlg.cn/react/debug/index.html</loc>
-    
-    <lastmod>2020-05-23T03:03:41.990Z</lastmod>
     
   </url>
   
@@ -303,13 +338,6 @@
   </url>
   
   <url>
-    <loc>https://blog.yanxlg.cn/396e831/</loc>
-    
-    <lastmod>2020-05-10T10:01:12.975Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://blog.yanxlg.cn/3452590/</loc>
     
     <lastmod>2020-05-10T10:01:06.155Z</lastmod>
@@ -359,14 +387,14 @@
   </url>
   
   <url>
-    <loc>https://blog.yanxlg.cn/f0e261b6/</loc>
+    <loc>https://blog.yanxlg.cn/59f37da9/</loc>
     
     <lastmod>2020-02-27T01:44:45.741Z</lastmod>
     
   </url>
   
   <url>
-    <loc>https://blog.yanxlg.cn/59f37da9/</loc>
+    <loc>https://blog.yanxlg.cn/f0e261b6/</loc>
     
     <lastmod>2020-02-27T01:44:45.741Z</lastmod>
     
