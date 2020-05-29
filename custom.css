@@ -105,10 +105,9 @@
     padding: 0.1rem 0.5rem 0.1rem 1.5rem!important;
 }
 
-#page #article-container ul,#post #article-container.post-content ul{
+#page #article-container ul,#page #article-container ol,#post #article-container.post-content ul,#post #article-container.post-content ol{
     list-style: none;
     padding: 0 0 0 0.8rem;
-    list-style: none;
 }
 
 #page #article-container ul>li ul>li::before,#post #article-container.post-content ul>li ul>li::before{
@@ -200,4 +199,8 @@
 }
 .gt-ico-text{
     vertical-align: middle!important;
+}
+
+#aside_content .card-info .card-info-social-icons i:hover{
+    transform: none!important;
 }

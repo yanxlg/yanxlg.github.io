@@ -2,9 +2,23 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://blog.yanxlg.cn/vue/index.html</loc>
+    <loc>https://blog.yanxlg.cn/c0add594/</loc>
     
-    <lastmod>2020-05-27T10:03:48.649Z</lastmod>
+    <lastmod>2020-05-29T10:55:01.616Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.yanxlg.cn/h5/eventloop.html</loc>
+    
+    <lastmod>2020-05-29T10:44:41.616Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://blog.yanxlg.cn/nodejs/mock/index.html</loc>
+    
+    <lastmod>2020-05-28T08:54:52.846Z</lastmod>
     
   </url>
   
@@ -82,13 +96,6 @@
     <loc>https://blog.yanxlg.cn/nodejs/ioc/index.html</loc>
     
     <lastmod>2020-05-21T09:32:30.732Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://blog.yanxlg.cn/nodejs/mock/index.html</loc>
-    
-    <lastmod>2020-05-21T09:31:03.368Z</lastmod>
     
   </url>
   
