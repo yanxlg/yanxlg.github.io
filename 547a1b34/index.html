@@ -1,0 +1,165 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>storage | yanxlg@blog</title><meta name="description" content="前言  随着前端业务的复杂化，前端对于数据敏感度越来越高，对于本地化存储数据的需求越来越多，本文主要介绍目前前端中可用于数据存储的方式 本地化方案 cookie  cookie 作用  服务端通常使用cookie+session来进行验证、授权等权限控制操作。  cookie可以临时存储小量数据供客户端使用，例如加密秘钥等  客户端可以将部分数据同时cookie来实现长期存储，或者传递给服务端"><meta name="keywords" content="h5,storage,跨窗口通信"><meta name="author" content="yanxlg"><meta name="copyright" content="yanxlg"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="cg1zWFKfJ7"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="storage"><meta name="twitter:description" content="前言  随着前端业务的复杂化，前端对于数据敏感度越来越高，对于本地化存储数据的需求越来越多，本文主要介绍目前前端中可用于数据存储的方式 本地化方案 cookie  cookie 作用  服务端通常使用cookie+session来进行验证、授权等权限控制操作。  cookie可以临时存储小量数据供客户端使用，例如加密秘钥等  客户端可以将部分数据同时cookie来实现长期存储，或者传递给服务端"><meta name="twitter:image" content="https://blog.yanxlg.cn/images/bg.jpeg"><meta property="og:type" content="article"><meta property="og:title" content="storage"><meta property="og:url" content="https://blog.yanxlg.cn/547a1b34/"><meta property="og:site_name" content="yanxlg@blog"><meta property="og:description" content="前言  随着前端业务的复杂化，前端对于数据敏感度越来越高，对于本地化存储数据的需求越来越多，本文主要介绍目前前端中可用于数据存储的方式 本地化方案 cookie  cookie 作用  服务端通常使用cookie+session来进行验证、授权等权限控制操作。  cookie可以临时存储小量数据供客户端使用，例如加密秘钥等  客户端可以将部分数据同时cookie来实现长期存储，或者传递给服务端"><meta property="og:image" content="https://blog.yanxlg.cn/images/bg.jpeg"><meta property="article:published_time" content="2019-03-29T06:59:56.000Z"><meta property="article:modified_time" content="2020-05-12T10:15:05.722Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="https://blog.yanxlg.cn/547a1b34/"><link rel="prev" title="共享sdk实例" href="https://blog.yanxlg.cn/5c4fa24d/"><link rel="next" title="RN 真机调试" href="https://blog.yanxlg.cn/b90162ba/"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  bookmark: {
+    message_prev: 'Press',
+    message_next: 'to bookmark this page'
+  },
+  runtime_unit: 'days',
+  runtime: true,
+  copyright: {"languages":{"author":"Author: yanxlg","link":"Link: ","source":"Source: yanxlg@blog","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: true,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" href="/custom.css"><script src="/custom.js"><!-- 增加performance--><script src="/js/performance.js"></script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="yanxlg@blog" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/images/avatar.svg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">46</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">46</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">Categories</div><div class="length_num">22</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/categories/react/"><i class="fa-fw blog-icon icon-react"></i><span> React</span></a></li><li><a class="site-page" href="/categories/vue/"><i class="fa-fw blog-icon icon-vue"></i><span> Vue</span></a></li><li><a class="site-page" href="/categories/nodejs/"><i class="fa-fw blog-icon icon-node"></i><span> Nodejs</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#本地化方案"><span class="toc-number">2.</span> <span class="toc-text">本地化方案</span></a></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(/images/bg.jpeg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">yanxlg@blog</a></span><span class="pull_right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/categories/react/"><i class="fa-fw blog-icon icon-react"></i><span> React</span></a></li><li><a class="site-page" href="/categories/vue/"><i class="fa-fw blog-icon icon-vue"></i><span> Vue</span></a></li><li><a class="site-page" href="/categories/nodejs/"><i class="fa-fw blog-icon icon-node"></i><span> Nodejs</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">storage</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="Created 2019-03-29 14:59:56"><i class="fa fa-calendar" aria-hidden="true"></i> Created 2019-03-29</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="Updated 2020-05-12 18:15:05"><i class="fa fa-history" aria-hidden="true"></i> Updated 2020-05-12</span></time><span class="post-meta__categories"><span class="post-meta__separator">|</span><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/h5/">h5</a><i class="fa fa-angle-right post-meta__separator" aria-hidden="true"></i><i class="fa fa-inbox post-meta__icon" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/h5/storage/">storage</a></span></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="post-meta__icon fa fa-file-word-o" aria-hidden="true"></i><span>Word count:</span><span class="word-count">1.6k</span><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-clock-o" aria-hidden="true"></i><span>Reading time: 5 min</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>Post View:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-comment-o" aria-hidden="true"></i><span>Comments:</span><a href="/547a1b34/#post-comment"><span class="gitalk-comment-count comment-count"></span></a></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>  随着前端业务的复杂化，前端对于数据敏感度越来越高，对于本地化存储数据的需求越来越多，本文主要介绍目前前端中可用于数据存储的方式</p>
+<h2 id="本地化方案"><a href="#本地化方案" class="headerlink" title="本地化方案"></a>本地化方案</h2><ol>
+<li><p>cookie</p>
+<ul>
+<li><p>cookie 作用<br>  服务端通常使用cookie+session来进行验证、授权等权限控制操作。<br>  cookie可以临时存储小量数据供客户端使用，例如加密秘钥等<br>  客户端可以将部分数据同时cookie来实现长期存储，或者传递给服务端</p>
+</li>
+<li><p>cookie 大小：不超过4KB</p>
+</li>
+<li><p>cookie 限制<br>cookie 在传统web中起到非常重要的作用，因为传统web仅能通过cookie在本地存储一些数据，常用与进行账号验证，token下发，授权等。cookie存在很多限制问题，具体如下：</p>
+<blockquote>
+<p>一、浏览器允许每个域名所包含的cookie数：<br>　&emsp;Microsoft指出InternetExplorer8增加cookie限制为每个域名50个，但IE7似乎也允许每个域名50个cookie。<br>&emsp;&emsp;Firefox每个域名cookie限制为50个。<br>&emsp;&emsp;Opera每个域名cookie限制为30个。<br>&emsp;&emsp;Safari/WebKit貌似没有cookie限制。但是如果cookie很多，则会使header大小超过服务器的处理的限制，会导致错误发生。<br>&emsp;&emsp;注：<code>“每个域名cookie限制为20个”将不再正确</code>！<br>二、当很多的cookie被设置，浏览器如何去响应。<br>&emsp;&emsp;除Safari（可以设置全部cookie，不管数量多少），有两个方法：<br>&emsp;&emsp;最少最近使用（leastrecentlyused(LRU)）的方法：当Cookie已达到限额，自动踢除最老的Cookie，以使给最新的Cookie一些空间。Internet Explorer和Opera使用此方法。<br>&emsp;&emsp;Firefox很独特：虽然最后的设置的Cookie始终保留，但似乎随机决定哪些cookie被保留。似乎没有任何计划（建议：在Firefox中不要超过Cookie限制）。<br>三、不同浏览器间cookie总大小也不同：<br>&emsp;&emsp;Firefox和Safari允许cookie多达4097个字节，包括名（name）、值（value）和等号。<br>&emsp;&emsp;Opera允许cookie多达4096个字节，包括：名（name）、值（value）和等号。<br>&emsp;&emsp;Internet Explorer允许cookie多达4095个字节，包括：名（name）、值（value）和等号。<br>注：多字节字符计算为两个字节。在所有浏览器中，任何cookie大小超过限制都被忽略，且永远不会被设置。</p>
+</blockquote>
+</li>
+<li><p>cookie 的属性<br>  ①. HttpOnly：该属性限制cookie仅能在http请求中被使用，通过javascript无法读取，可以有效防止<code>XSS</code>攻击<br>  ②. Secure：该属性限制仅在SSH链接时才会向服务端发送cookie，即尽有https协议中才会附带客户端cookie<br>  ③. Path：cookie生效路径，cookie仅在当前路径下可以被访问，该限制对javascript和http请求都生效，必须以<code>/</code>结束，是一个目录路径<br>  ④. Domain：cookie生成域名，cookie尽在该域名下可以被访问，同时对javascript和http请求生效<br>  ⑤. MaxAge：cookie失效时间，单位秒，<code>如果是整数，则在maxAge之后失效，如果是负数表示是临时cookie，关闭浏览器即会失效，同时会清除，如果是0表示删除该cookie，默认是-1</code><br>  ⑥. Name： cookie键名<br>  ⑦. Value：cookie值<br>  ⑧. Comment：cookie使用说明<br>  ⑨. Version：cookie版本号</p>
+</li>
+<li><p>cookie 生命周期<br>  cookie通常在http请求服务器时，服务器通过<code>Set-Cookie</code>设置到客户端中，客户端与服务端通信时，http请求中会自动带上服务端可以访问到的cookie，服务端通过cookie进行验证处理，当cookie失效时，浏览器并不会立即清除cookie,会在窗口关闭后清除</p>
+</li>
+<li><p>cookie 应用范围<br>  仅存在于http协议中，其他TCP/IP 协议中是不存在的，虽然Websocket握手是基于Http协议的，仅可以在握手拦截器中获取到cookie去进行验证,通信过程中无法获取cookie</p>
+</li>
+<li><p>cookie 客户端使用方式<br>  读取：<code>document.cookie</code>，返回所有可以访问的cookie键值对字符串，以<code>；</code>连接<br>  设置：<code>document.cookie</code>，通过document.cookie将需要设置的cookie进行属性覆盖<br>  删除：通过<code>document.cookie</code>设置expire过期时间实现删除</p>
+</li>
+</ul>
+</li>
+<li><p>sessionStorage<br> sessionStorage与session是两个完全不同的概念，session是一个会话连接，通常配合cookie实现会话保持机制，作用在服务端；sessionStorage是客户端一个数据存储机制，以文件形式存在于浏览器中</p>
+<ul>
+<li>大小：通常浏览器中大小在<code>5M</code>左右，不同的浏览器略微不同，在2.5MB 到 10MB 之间</li>
+<li>操作：<ul>
+<li>存储：sessionStorage.setItem(key:string,value:string|object);// 高版本<code>chrome</code>浏览器支持直接存储json对象，其他浏览器会自动将对象进行toString处理</li>
+<li>读取：sessionStorage.getItem(key:string); //<code>chrome</code>中如果设置的是对象，则读取出来的就是对象，其他浏览器必定是字符串 </li>
+<li>删除：sessionStorage.removeItem(key:string);</li>
+<li>清空：sessionStorage.clear();</li>
+<li>检查：sessionStorage.key(key:string);//判断是否有key</li>
+<li>键值对数量：sessionStorage.length</li>
+</ul>
+</li>
+<li>阻塞：storage操作是同步操作，会阻塞上下文</li>
+<li>作用域：<br>  sessionStorage受同源策略影响，不可以跨域访问，sessionStorage受窗口影响，仅在当前窗口可以访问，即<code>同源同窗口</code>，窗口关闭后自动清除，刷新不会清除</li>
+<li>生命周期：<br>  <code>临时存储</code>，sessionStorage仅存在于当前窗口，窗口关闭即刻回收</li>
+</ul>
+</li>
+<li><p>localStorage<br> localStorage于sessionStorage基本类似，可以参照sessionStorage去理解， 仅作用域、声明周期和事件存在区别</p>
+<ul>
+<li>作用域：<br>  localStorage受同源策略影响，不可跨域访问，但可以跨窗口访问，这是<code>跨窗口通信</code>的一种常用方法的实现原理</li>
+<li>生命周期：<br>  <code>永久存储</code>，如果不手动清除，数据会永久存储，不会自动回收</li>
+<li>事件：<code>storage</code><br>  localStorage相比于sessionStorage多一个事件监听，这个事件在localStorage发生改变时会触发，这也是实现<code>跨窗口通信</code>的基础。此事件在<code>同Context(不能说同窗口)</code>中不会触发，在同一个上下文环境中执行监听和更新操作，是无法监听到事件触发的，只有在不同的上下文（包括不同窗口或者iframe）中分别进行更新个监听，才能正常触发该事件</li>
+</ul>
+</li>
+<li><a href="/f688fea9/" title="CacheStorage">CacheStorage</a></li>
+<li><a href="/c953062e/" title="IndexDB">IndexDB</a></li>
+<li><a href="/c953062e/" title="WebSql">WebSql</a>
+</li>
+</ol>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">yanxlg</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://blog.yanxlg.cn/547a1b34/">https://blog.yanxlg.cn/547a1b34/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/h5/">h5</a><a class="post-meta__tags" href="/tags/storage/">storage</a><a class="post-meta__tags" href="/tags/%E8%B7%A8%E7%AA%97%E5%8F%A3%E9%80%9A%E4%BF%A1/">跨窗口通信</a></div><div class="post_share"><div class="social-share" data-image="/images/bg.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> Donate<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="/images/wechat.png" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="/images/alipay.png" alt="支付宝"/><div class="post-qr-code__desc">支付宝</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/5c4fa24d/"><img class="prev_cover" data-src="/images/bg.jpeg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Previous Post</div><div class="prev_info">共享sdk实例</div></div></a></div><div class="next-post pull_right"><a href="/b90162ba/"><img class="next_cover" data-src="/images/bg.jpeg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">RN 真机调试</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> Recommend</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/f688fea9/" title="cacheStorage"><img class="relatedPosts_cover" data-src="/images/bg.jpeg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2019-06-02</div><div class="relatedPosts_title">cacheStorage</div></div></a></div><div class="relatedPosts_item"><a href="/8e448d63/" title="mobile click 300-350ms"><img class="relatedPosts_cover" data-src="/images/bg.jpeg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2019-04-29</div><div class="relatedPosts_title">mobile click 300-350ms</div></div></a></div><div class="relatedPosts_item"><a href="/bb551a96/" title="service worker"><img class="relatedPosts_cover" data-src="/images/bg.jpeg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2019-04-01</div><div class="relatedPosts_title">service worker</div></div></a></div><div class="relatedPosts_item"><a href="/5213db69/" title="h5 RTL"><img class="relatedPosts_cover" data-src="/images/bg.jpeg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2019-02-25</div><div class="relatedPosts_title">h5 RTL</div></div></a></div><div class="relatedPosts_item"><a href="/c953062e/" title="database"><img class="relatedPosts_cover" data-src="/images/bg.jpeg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2019-01-29</div><div class="relatedPosts_title">database</div></div></a></div><div class="relatedPosts_item"><a href="/14f889f2/" title="package.json"><img class="relatedPosts_cover" data-src="/images/bg.jpeg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2018-10-31</div><div class="relatedPosts_title">package.json</div></div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> Comment</span></div><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '12a1217ff53b08c6c73a',
+  clientSecret: '7ee99a0195d3d7837a04a7eeb423f98c960d9f60',
+  repo: 'yanxlg.github.io',
+  owner: 'yanxlg',
+  admin: ['yanxlg'],
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN',
+  perPage: 10,
+  distractionFreeMode: false,
+  pagerDirection: 'last',
+  createIssueManually: false,
+  updateCountCallback: commentCount
+})
+gitalk.render('gitalk-container')
+
+function commentCount(n){
+  try {
+    document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+  } catch (e) {
+    return false
+  }
+}</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By yanxlg</div><div class="framework-info"><span>Driven </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="Read Mode"></i><i class="fa fa-plus" id="font_plus" title="Increase font size"></i><i class="fa fa-minus" id="font_minus" title="Decrease font size"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="Traditional Chinese and Simplified Chinese Conversion" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="Dark Mode"></i></div><div id="rightside-config-show"><div id="rightside_config" title="Setting"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="Scroll to comment"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="Table of Contents" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="Back to top" aria-hidden="true"></i></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="150" mobile="false" src="/js/third-party/canvas-nest.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/third-party/click_heart.js"></script><script src="/js/search/local-search.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script></body></html>
