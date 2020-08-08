@@ -4,6 +4,56 @@
   
     
     <entry>
+      <title>node 自动切换</title>
+      <link href="/fbeb4634/"/>
+      <url>/fbeb4634/</url>
+      
+        <content type="html"><![CDATA[<h2 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h2><p>很多场景下我们需要同时使用多个不同版本的Node.js。比如：你有多个项目，这些项目由于开始时间不同，用的Node.js版本都会不同；又或者你现在项目用的是4.x.x，但是你想试试下一个LTS版本——6.x.x。这些情况下，你会发现你每次都要去切换Node.js的版本，哪怕你用NVM来管理多个Node.js，切换也都需要执行nvm use …命令。有的时候会忘记导致很多不必要的麻烦！</p><p>那么怎么样才能根据不同的项目自动切换对应的Node版本呢？</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>先抛开是否有工具可以帮我们完成这件事情。我们先来想一下如果让你来实现这样一个功能，你会怎么做？</p><p>首先，你至少需要申明你各个项目所需要的Node版本号，那么最方便的就是：</p><ol><li>直接申明在 package.json 中</li><li>单独在项目根目录中某个文件中（文件名约定好）申明</li></ol><p>然后，我们需要一个触发点，这个触发点可以让你去根据上述提到的文件中获取到 Node 版本号并自动切换。而这个切换点最好的当然是cd命令。因为我们总是需要先cd到项目目录中去。</p><p>好了，以上就是我们的思路，汇总下来就是：</p><ol><li>在项目根目录中需要一个地方来申明需要的 Node 版本号</li><li>当用户“进入”到项目中的时候，自动根据申明的 Node 版本号进行自动切换</li></ol><p>##解决方案<br>社区已经有类似我们上述思路的工具，这里推荐<a href="https://github.com/wbyoung/avn" target="_blank" rel="noopener">avn-Automatic Version Switching for Node</a>，avn 提供了 nvm的插件（当然也有n的插件），使用起来非常简单（以NVM为例），直接：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i -g avn avn-nvm</span><br><span class="line">avn setup</span><br></pre></td></tr></table></figure><p>然后呢，只要在你的项目根目录下创建一个<code>.node-version</code>文件，并且以<a href="https://semver.org/" target="_blank" rel="noopener">semver</a>的格式来申明所需要的 Node 的版本号，如：4.5.0</p><p>接着，当你cd到项目目录中的时候，avn 就会自动帮你切换到指定的 Node 版本。非常方便！</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> node </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> node </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>frontend</title>
+      <link href="/cc111e9c/"/>
+      <url>/cc111e9c/</url>
+      
+        <content type="html"><![CDATA[<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>前端越来越多元化，也越来越复杂，不同于早期的只能做Web 网页，现在的前端涉及到更多的领域，企业对于前端的要求也越来越高，期间，出现了很多新的名词，如<code>&quot;大前端&quot;</code>,<code>&quot;全栈&quot;</code><br><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/images/cover/frontend.png" alt="frontend技术体系"><br>前端目前主题分为”大前端”、”Nodejs”、”测试相关”、”微前端”、”Serverless”等几部分，下面针对每个部分做简要介绍：</p><h2 id="大前端"><a href="#大前端" class="headerlink" title="大前端"></a>大前端</h2><p>“大前端”概念来源于”所有前端开发领域”的总称，表示目前所涉及到的所有前端应用、产品的开发，主要涉及<code>PC 站</code>、<code>m站</code>、<code>公众号</code>、<code>小程序</code>、<code>移动App</code>、<code>桌面客户端</code>等等。所涉及到的技术栈错综复杂。</p><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/cc111e9c/frontend_technology.png" class="img-left" title="frontend技术体系"><p>大前端：<br>全栈：</p><ol><li><p>发展阶段<br>前端技术发展主要经过四个时代，分别为<code>工具库时代</code>、<code>template时代</code>、<code>Web Components时代</code>、<code>框架时代</code>。</p><ul><li><code>工具库时代</code>：主流是使用一些<code>Dom操作库</code>来完成页面功能及布局，开发比较繁琐，需要写大量的dom操作，极具代表的有<code>jquery全家桶</code>、<code>zepto全家桶</code>、<code>Prototype库</code>等。简化了原生dom操作api，但是开发仍然相当繁琐。</li><li><code>template时代</code>：为解决工具库在动态页面方面存在的缺陷，引出了模板的技术，通过模板引擎，实现开发简化。代表库有<code>tppl</code>、<code>template.js</code>、<code>artTemplate</code>、<code>dot.js</code>、<code>baiduTemplate</code>等。</li><li><code>Web Components时代</code>：随着前端的发展，前端项目越来越庞大，此时公共组件复用成了重要技术话题，<code>Web Components</code>的提出旨在解决该问题，它允许用户自定义浏览器中的基础组件，但浏览器对于该标准的支持一直以来都不理想，因此该技术一直没有得到推广使用，但最近又被重新提起，有推动发展的趋势。</li><li><code>框架时代</code>：受Java等语言框架影响，前端也开始推广相应的框架，从<code>MVC</code>到<code>MVP</code>再到<code>MVVM</code>，框架时代的前言产品主流为<code>Angular</code>，早期<code>Angular</code>由于没有强竞争力的框架，非常热门，在一定程度上简化了代码，但是配置非常复杂，因此当<code>React</code>问世后，<code>Angular</code>受到很大冲击，大量开发者转移到了<code>React</code>框架中，<code>React</code>由于其完全变相js的语法，完全放弃了html的编写，对于部分开发这来说不太习惯，尤其是新手开发者，因此<code>Vue</code>框架问世，<code>Vue</code>迅速被这些开发者所接受，并使用量上直追<code>React</code>。当然，除了这三个主流框架外，还有一些代表性框架，如<code>Knockout</code>、<code>Ember</code>、<code>Polymer</code>等。此阶段引出了前端架构。</li></ul></li><li><p>MVC-&gt;MVP-&gt;MVVM</p></li><li><p>框架对比</p></li><li><p>其他核心技术</p></li></ol><ul><li>包管理<br>  前端已经不是原来的只能将前端文件放在项目中或者互联网上，基于node.js的出现，前端拥有了自己的包管理器，可以实现项目依赖管理，简化了项目搭建，版本管理也更加便捷，主流的包管理器有<code>npm</code>、<code>cnpm</code>、<code>yarn</code>、<code>tyarn</code>，通常会使用<code>npm</code>和<code>yarn</code>即可，另外两个都是淘宝镜像源配置后的产物，使用方式没有变化。包管理器使用时需要了解其缓存机制，版本更新机制，便于检查由于包下载问题造成的页面bug。</li><li>工程化<br>  前端工程化是现代前端的必备技能，<code>一切能提升前端开发效率，提高前端应用质量的手段和工具都是前端工程化</code>，工程化主要用来提升开发效率、降低大型开发项目的难度。需要掌握的工程化技术栈有<code>webpack</code>、<code>gulp</code>、<code>grunt</code>、<code>fis系列</code>等，其中<code>webpack</code>尤其重要，需要掌握其运行原理及会开发相应插件。对于前端架构师来说是必须要掌握的技能</li><li>模块化<br>  前端模块化也是现代前端必备技能之一，现在早已不是一个js文件跑整个网站的时代了，从前期的<code>Common JS</code>、<code>AMD</code>、<code>CMD</code>到现在的<code>ES6 Module</code>的快速推进，无不彰显模块化的重要性。虽然现代前端中都使用<code>ES6 Module</code>，但是每个公司总有一些老项目会使用<code>Common JS</code>或者<code>AMD</code>或者<code>CMD</code>，甚至，前端工程化最终编译<code>ES6 Module</code>都会编译成<code>Common JS</code>，因此对于这些都要有所了解。</li><li>cdn<br>  现代前端常规优化技能之一，cdn的技术对于web用户加载体验带来了极大提升，前端工程师需要了解cdn原理，cdn的强缓存机制，了解原理后才能分析运用不当可能造成的相关问题。</li><li>v8<br>  不同的浏览器使用不同的内核，现在最主流的也就是chrome的v8引擎，对于v8引擎底层，一般前端工程师不需要了解太多，但是其任务队列和内存回收机制需要掌握</li><li>预编译<br>  现代前端常规优化技能之一，为了提升前端开发的效率，多样化的预编译语言是前端必须掌握的技能，常用预编译语言有<code>Styl</code>、<code>less</code>、<code>sass</code>、<code>typescript</code>、<code>flow</code>，由于浏览器对于es6及以后的规范支持不一，而使用最新es规范api需要经过<code>babel</code>编译，因此<code>babel</code>是一个比较重要的预编译库，前端需要掌握babel的配置，架构师必须掌握其原理和插件开发。</li><li>协议<br>  前端优化需要掌握的技能之一，前端已经不是完全的<code>协议无关性</code>了，从<code>WebSocket</code>的出现，及前端优化，无不与通信协议相关，对于前端开发者需要掌握http2.0的改动，需要掌握websocket技术。</li><li>质量控制<br>  前端工程化是现代前端的必备技能之一，每种开发语言中都有一些非常耗性能的api或语法，正常环境中不希望出现在代码中，并且每个公司都有自己不同的代码规范，如果都使用文档去管理，那需要开发者相当长一段时间的过渡，因此质量控制技术应运而生，通过配置文件配置项目的代码规范，出现违背规范的在coding或预编译阶段直接报错或提示，用来统一项目代码规范。常用的质量管理工具有<code>jslint</code>、<code>jshint</code>、<code>eslint</code>、<code>tsline</code>。</li></ul><ol start="5"><li><p>移动App<br> 移动App开发是目前高级以上前端工程师必须要掌握的技能，移动App开发对于前端工程师来说通常有三种不同的模式，第一种是使用<code>JSBridge</code>，实现网页JS与App原生交互，前端开发者需要了解其原理，一定程度上需要会编写<code>桥接</code>代码，主流的JSBridge框架有Native.js、Ionic、Appcan、Apicloud、H5+。第二种是<code>React Native</code>与<code>Weex</code>这种，通过编写跨平台代码，生成原生App，该技术方案需要了解其运行原理，因为只有明白运行原理后才能进行相应优化。第三种是使用flutter，编译成二进制文件，与<code>React Naive</code>和<code>Weex</code>不同的是业务代码运行上下文区别，RN最终是通过JSCore运行js代码，而Flutter通过Engine执行二进制文件，明显性能提升。</p></li><li><p>typescript<br> typescript 作为目前前端热门语言之一，是现代前端工程师需要掌握的必备语言，一直依赖都说js是弱类型语言，但是弱类型语言并不代表没有类型，只是类型表示在值上，与变量无关，变量可以赋予任何类型的值，因此<code>API</code>强调类型明确。js作为弱类型语言一直依赖备受开发者喜爱，与C#有一定共通之处。但也有许多弊端，例如类型不明确造成的调用错误无法在coding阶段直接暴露出来，需要运行代码测试后才能发现，这样加大了前端开发工作量，而且对于许多喜欢强类型语言的人来说，js比较难以接受，因此typescipt的出现受大量前端开发者及公司的喜爱。目前到大公司及开源项目基本都在使用typescript，typescript是一个预编译语言，它将js在开发阶段由若类型语言变成了强类型语言。</p></li><li><p>桌面客户端开发<br> 桌面客户端开发对于资深前端来说是必备技能之一，弥补了前端在桌面应用的不足，真正实现了大前端。常用的桌面客户端开发框架有<code>Electron</code>和<code>NW.js</code>，需要在一定程度上了解其原理。客户端代码是node，ui是web，容器是Chromium</p></li></ol><h2 id="Node-js"><a href="#Node-js" class="headerlink" title="Node.js"></a>Node.js</h2><p>都说Node.js是为前端工程师提供服务端能力而设计的语言，因此已经变成了前端必备技能。nodejs使用v8引擎解析执行js代码，能够在脱离浏览器环境下完成更多的功能。Nodejs可以用于开发客户端、服务端、cli、script、bin处理程序、爬虫自动化等功能，客户端开发主要使用上述两种客户端开发框架，服务端需要了解的底层框架有<code>Express</code>、<code>Koa系列</code>、<code>Hapi</code>、<code>Fastify</code>等。架构师需要熟悉其之间的区别，能够根据需要使用不同的框架。Express上层框架比较著名的是<code>Nest.js</code>，它是基于Express实现的IOC MVC框架，类似于Java中的Spring。基于Koa2的上层框架比较出名的是阿里的Egg.js，它仅实现了分层，并没有实现IOC，开发仍然比较繁琐，没有<code>Nest.js</code>的便捷，因此阿里基于Egg.js的上层框架<code>midway</code>在孵化中，其是基于Egg.js实现的一套IOC上层框架。</p><ol><li><p>服务端</p></li><li><p>爬虫/自动化<br>使用Node.js做爬虫还是比较多的，这也是资深前端需要掌握的技能之一，最初webdrier设计出来是为了实现自动化测试，也就是用代码控制浏览器，自动完成指定操作，判断结果，为了释放测试资源。而由于可以控制浏览器这一特性因此也被广泛用在爬虫开发中，主要的框架有<code>Selenium</code>、<code>Puppeteer</code>、<code>PhantomJS</code>等等，熟悉这些框架也是前端实现自动化测试的前提。</p></li><li><p>cli<br>前端架构师必备技能，主要用来开发脚手架，根据实际需要定制开发适合的脚手架，通过脚手架简化项目搭建过程。</p></li></ol><h2 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h2><p>现代的<code>frontend</code>已经不仅仅只包括前端了，涉及到服务端、脚本，cli、bin，同时还涉及到测试相关技术栈，对于测试，前端并不需要了解过深，前端目前涉及到的测试通常仅有<code>单元测试</code>和<code>自动化测试</code>，单元测试一般是组件、工具库开发时需要，通常使用<code>Jest</code>、<code>Mocha</code>等框架，前端自动化测试是近两年来比较热门的技术，旨在为测试减负，减少测试流程回归的负担，同时能保证服务正常运行。自动化测试主要使用的是node中控制浏览器的框架，例如<code>Selenium</code>、<code>Puppeteer</code>等，通过编写测试代码控制浏览器执行指定交互并判断结果，完全coding对于前端来说工作量比较大，改动也可能比较频繁，因此推出了录制回放的框架，开发者只需要在自测时将操作过程通过该框架录制称脚本，以后直接执行该录制脚本即可，极大的方便了自动化测试的编写。典型框架如阿里的<code>UI Recorder</code>和<code>Seleniumn IDE</code>。</p><h2 id="Serverless"><a href="#Serverless" class="headerlink" title="Serverless"></a>Serverless</h2><h2 id="微前端"><a href="#微前端" class="headerlink" title="微前端"></a>微前端</h2><p>qiankun</p><ol><li>脚手架</li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> h5 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> h5 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>权限设计</title>
       <link href="/5a8a6c8d/"/>
       <url>/5a8a6c8d/</url>
@@ -473,6 +523,31 @@
     
     
     <entry>
+      <title>React 服务端渲染</title>
+      <link href="/1b5b7ecc/"/>
+      <url>/1b5b7ecc/</url>
+      
+        <content type="html"><![CDATA[<div id="hexo-blog-encrypt" data-wpm="密码错误，请输入正确的密码." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <div class="hbe-input-container">  <input type="password" id="hbePass" placeholder="" />    <label for="hbePass">本文暂不开放，需要密码才可阅读.</label>    <div class="bottom-line"></div>  </div>  <script id="hbeData" type="hbeData" data-hmacdigest="57c4f9a7d4e3f11ce550b0f899689c3cd37b4f09777bfccc63201415fa7bf73f">9862ab3682ec9eb250517d78be2f804b</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
+      
+      
+      <categories>
+          
+          <category> react </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> react </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>React</title>
       <link href="/dee17c46/"/>
       <url>/dee17c46/</url>
@@ -503,31 +578,6 @@
       <url>/963d3ca1/</url>
       
         <content type="html"><![CDATA[<div id="hexo-blog-encrypt" data-wpm="密码错误，请输入正确的密码." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <div class="hbe-input-container">  <input type="password" id="hbePass" placeholder="" />    <label for="hbePass">本文暂不开放，需要密码才可阅读.</label>    <div class="bottom-line"></div>  </div>  <script id="hbeData" type="hbeData" data-hmacdigest="383fb8f2ea5171219c3bf81b75a9c3ce1209c6e8117fbac3aa9ed296541e2360">efa047241e971872ecd0778527c664b1</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
-      
-      
-      <categories>
-          
-          <category> react </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> react </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>React 服务端渲染</title>
-      <link href="/1b5b7ecc/"/>
-      <url>/1b5b7ecc/</url>
-      
-        <content type="html"><![CDATA[<div id="hexo-blog-encrypt" data-wpm="密码错误，请输入正确的密码." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <div class="hbe-input-container">  <input type="password" id="hbePass" placeholder="" />    <label for="hbePass">本文暂不开放，需要密码才可阅读.</label>    <div class="bottom-line"></div>  </div>  <script id="hbeData" type="hbeData" data-hmacdigest="57c4f9a7d4e3f11ce550b0f899689c3cd37b4f09777bfccc63201415fa7bf73f">9862ab3682ec9eb250517d78be2f804b</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
       
       
       <categories>
