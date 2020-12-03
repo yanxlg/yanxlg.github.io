@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://blog.yanxlg.cn/"/>
-  <updated>2020-08-08T05:03:44.563Z</updated>
+  <updated>2020-12-03T05:26:29.632Z</updated>
   <id>https://blog.yanxlg.cn/</id>
   
   <author>
@@ -17,11 +17,38 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Page Components Design</title>
+    <link href="https://blog.yanxlg.cn/210ae7d9/"/>
+    <id>https://blog.yanxlg.cn/210ae7d9/</id>
+    <published>2020-12-02T11:09:14.000Z</published>
+    <updated>2020-12-03T05:26:29.632Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>为了实现快速生成多元化、多样化的网站，实现站点风格、元素自定义，从而解决UI相似，第三方平台通过相似度算法进行封站等问题。</p><h2 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h2><ul><li>考虑点<ol><li>组件化设计</li><li>性能问题</li><li>页面编辑器设计</li><li>框架选型</li><li>附加服务</li><li>窗口数据、状态同步</li></ol></li><li>技术设计</li></ul><ol><li>项目架构<img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/210ae7d9/1.png" class="" title="架构图"></li></ol><ul><li>全局配置管理：用于管理站点全局配置，页面共享配置，网站公共api，站点数据管理层。</li><li>Pages：页面层，Page组件，用于组装页面组件列表，调用组件api，获取初始数据，实现页面服务端渲染。</li><li>组件：组件库，用于互相组合形成页面。</li><li>数据：每个组件拥有自己的api，进行异步调用，通过h2复用及reconnect解决创建链接问题，同时解决服务端同步取数据造成的性能问题。</li><li>底层支撑：整个项目将使用到React、Preact、Nextjs、Nestjs、Jest、Typescript。PC端使用React，移动端使用Preact，通过plugin自动转换，实现开发过程无差别化，开发过程基于React开发，移动端使用Preact代替React能有效减少lib的体积；Nestjs 用于实现服务端渲染；Nestjs 作为Node环境框架，配合Nextjs实现服务端渲染系统，同时提供部分附加服务；Jest用于开发组件<code>UI Test</code> 及 <code>Unit Test</code>代码，组件及lib测试覆盖率必须达到<code>85%</code>以上；Typescript作为开发语言，严格限制代码规范，不符合规范的代码不允许提交。</li></ul><ol start="2"><li><p>系统结构</p><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/210ae7d9/4.png" class="" title="系统结构图"><ol><li>AppContext、Page、PageContext、PageContent 层都属于系统封装，不提供开发人员直接修改。PageContent支持开发人员处理声明周期事件，允许开发人员在其不同生命周期中实现打点、preload等逻辑。</li><li>组件在组件库中开发、发布、Unit Test、Ui Test、在h5和PC项目中根据配置进行动态倒入组件</li><li>组件拥有版本号属性，进行版本控制，结构如下：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">compponentA/</span><br><span class="line">├── version1.0</span><br><span class="line">│   ├── .less</span><br><span class="line">│   ├── .tsx</span><br><span class="line">│   ├── .test.tsx</span><br><span class="line">│   └── .yaml</span><br></pre></td></tr></table></figure></li></ol><ul><li>.less：组件样式文件</li><li>.tsx：组件内容文件</li><li>.test.tsx：Unit Test、UI Test文件，执行Jest时会遍历每个组件下该文件，进行检测并计算覆盖率</li><li>.yaml：组件属性及配置定义，用于编辑系统中生成JsonForm</li><li>组件需要支持<code>QTP</code>标记，为自动化测试提供基础</li></ul></li><li><p>ssr流程</p><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/210ae7d9/3.png" class="" title="ssr流程图"><ul><li>Node服务获取网站组件静态配置，通过api获取会比较慢，发生修改需要通知Node进行缓存（memory或redis）,调用缓存中的配置进行服务端渲染，并通过<code>注水</code>完成客户端同构</li><li>遍历组件列表，调用组件<code>getServerSideProps</code>方法获取initData，生成html，并脱水后返回给浏览器</li><li>客户端注水，完成框架同构</li><li>路由切换由客户端处理渲染逻辑，根据下一页面组件配置数据生成骨架屏页面，并由客户端发起api请求</li></ul></li><li><p>完整流程</p><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/210ae7d9/2.png" class="" title="完整流程"><ul><li>ssr需要根据国家、语言、货币等key进行缓存，如商品列表页面添加缓存的同时需要确保列表支持<code>商品重复检测</code>，不显示重复商品，因缓存数据可能更新不及时，加载下一页时数据可能会重复。</li><li>PWA在PC和h5中都需要使用，最基本用于实现强缓存框架类文件。组件及业务代码也可缓存，编译时如文件发生变化，须改变生成文件名，文件名生成通过文件内容hash8生成</li></ul></li></ol><h2 id="优化分析"><a href="#优化分析" class="headerlink" title="优化分析"></a>优化分析</h2><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/210ae7d9/5.jpg" class="" title="优化分析"><p>性能问题及相关解决方案基本参照上述思维导图即可进行优化，在开发过程中需要严格按照相应要求进行开发。</p><h2 id="附加服务"><a href="#附加服务" class="headerlink" title="附加服务"></a>附加服务</h2><ol><li>性能分析服务：目前网站打点托管于vova打点系统，数据无法获取，不便与进行分析及调优，需要开发独立的性能分析服务，客户端上传相关性能指标，服务器端进行收集分析，后续可通过相关分析数据进行自动调优</li></ol><h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><ol><li>页面编辑器设计：参考另外专项设计文档</li><li><code>窗口数据、状态同步</code>：开发PC时根据需要待定</li><li><code>缓存方案</code>：参考另外设计文档（待定）</li></ol>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;需求&quot;&gt;&lt;a href=&quot;#需求&quot; class=&quot;headerlink&quot; title=&quot;需求&quot;&gt;&lt;/a&gt;需求&lt;/h2&gt;&lt;p&gt;为了实现快速生成多元化、多样化的网站，实现站点风格、元素自定义，从而解决UI相似，第三方平台通过相似度算法进行封站等问题。&lt;/p&gt;
+&lt;h2 
+      
+    
+    </summary>
+    
+    
+    
+      <category term="react" scheme="https://blog.yanxlg.cn/tags/react/"/>
+    
+      <category term="design" scheme="https://blog.yanxlg.cn/tags/design/"/>
+    
+  </entry>
+  
+  <entry>
     <title>node 自动切换</title>
     <link href="https://blog.yanxlg.cn/fbeb4634/"/>
     <id>https://blog.yanxlg.cn/fbeb4634/</id>
     <published>2020-08-08T04:58:47.109Z</published>
-    <updated>2020-08-08T05:03:44.563Z</updated>
+    <updated>2020-08-08T05:04:04.098Z</updated>
     
     <content type="html"><![CDATA[<h2 id="问题背景"><a href="#问题背景" class="headerlink" title="问题背景"></a>问题背景</h2><p>很多场景下我们需要同时使用多个不同版本的Node.js。比如：你有多个项目，这些项目由于开始时间不同，用的Node.js版本都会不同；又或者你现在项目用的是4.x.x，但是你想试试下一个LTS版本——6.x.x。这些情况下，你会发现你每次都要去切换Node.js的版本，哪怕你用NVM来管理多个Node.js，切换也都需要执行nvm use …命令。有的时候会忘记导致很多不必要的麻烦！</p><p>那么怎么样才能根据不同的项目自动切换对应的Node版本呢？</p><h2 id="思路"><a href="#思路" class="headerlink" title="思路"></a>思路</h2><p>先抛开是否有工具可以帮我们完成这件事情。我们先来想一下如果让你来实现这样一个功能，你会怎么做？</p><p>首先，你至少需要申明你各个项目所需要的Node版本号，那么最方便的就是：</p><ol><li>直接申明在 package.json 中</li><li>单独在项目根目录中某个文件中（文件名约定好）申明</li></ol><p>然后，我们需要一个触发点，这个触发点可以让你去根据上述提到的文件中获取到 Node 版本号并自动切换。而这个切换点最好的当然是cd命令。因为我们总是需要先cd到项目目录中去。</p><p>好了，以上就是我们的思路，汇总下来就是：</p><ol><li>在项目根目录中需要一个地方来申明需要的 Node 版本号</li><li>当用户“进入”到项目中的时候，自动根据申明的 Node 版本号进行自动切换</li></ol><p>##解决方案<br>社区已经有类似我们上述思路的工具，这里推荐<a href="https://github.com/wbyoung/avn" target="_blank" rel="noopener">avn-Automatic Version Switching for Node</a>，avn 提供了 nvm的插件（当然也有n的插件），使用起来非常简单（以NVM为例），直接：</p><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm i -g avn avn-nvm</span><br><span class="line">avn setup</span><br></pre></td></tr></table></figure><p>然后呢，只要在你的项目根目录下创建一个<code>.node-version</code>文件，并且以<a href="https://semver.org/" target="_blank" rel="noopener">semver</a>的格式来申明所需要的 Node 的版本号，如：4.5.0</p><p>接着，当你cd到项目目录中的时候，avn 就会自动帮你切换到指定的 Node 版本。非常方便！</p>]]></content>
     
@@ -441,38 +468,6 @@
     </summary>
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>图片懒加载</title>
-    <link href="https://blog.yanxlg.cn/f0e261b6/"/>
-    <id>https://blog.yanxlg.cn/f0e261b6/</id>
-    <published>2019-11-04T08:10:35.000Z</published>
-    <updated>2020-02-27T01:44:45.741Z</updated>
-    
-    <content type="html"><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>随着H5页面图片资源的丰富，首屏页面加载效率受到明显限制，因此优化图片加载成为一个重要的需求，而图片的优化，除了压缩、缓存外，还有一个重要的方式是<code>懒加载</code>。本文主要介绍<code>懒加载</code>的实现方案及思路。</p><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><code>懒加载</code>从字面看，<code>就是我比较懒，你催我要的时候我才加载，不然我就罢工休息</code>，因此主要的做法就是一开始不显示图片，在需要的时候我才加载并显示图片。什么时候才是需要的时候呢？从UI交互上讲就是图片所在的元素容器显示在viewport上的时候。因此设计方案如下：</p><h2 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h2><ol><li>默认情况下<code>img</code>标签不设置<code>src</code>属性，仅做占位使用。</li><li>当该<code>img</code>元素被移动到可视区域<code>viewport</code>中时设置其<code>src</code>属性为需要访问的图片地址。</li><li>图片显示后回收对该图片的监听，释放资源</li></ol><p>第一步比较简单，在js或者模板中，生成<code>img</code>时，使用<code>data-src</code>属性替代<code>src</code>属性即可，关键是第二步和第三步，如何去监听及释放。<br>从掌握的前端知识中可以发现，有两种方式可以实现上面的逻辑：</p><h2 id="方案一：Observer"><a href="#方案一：Observer" class="headerlink" title="方案一：Observer"></a>方案一：Observer</h2><p>详细了解浏览器<a href="/e4278974/" title="Observer">Observer</a>的用法，我们可以发现有一个<code>Intersection Observer</code>能够观察元素位置，同时支持取消观察的API，满足当前需求，因此可以实现为：</p><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">data-lazyload</span> <span class="attr">data-src</span>=<span class="string">"img-1.jpg"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">data-lazyload</span> <span class="attr">data-src</span>=<span class="string">"img-2.jpg"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">data-lazyload</span> <span class="attr">data-src</span>=<span class="string">"img-3.jpg"</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- more images --&gt;</span></span><br></pre></td></tr></table></figure><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> callback = <span class="function">(<span class="params">entries, observer</span>)=&gt;</span> &#123;</span><br><span class="line">    entries.forEach(<span class="function"><span class="params">entry</span> =&gt;</span> &#123;</span><br><span class="line">        entry.target.src = entry.target.dataset.src;</span><br><span class="line">        observer.unobserve(entry.target);<span class="comment">// 取消观察</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> lazyLoadObserver = <span class="keyword">new</span> IntersectionObserver(callback);</span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">'[data-lazyload]'</span>).forEach(<span class="function"><span class="params">img</span> =&gt;</span> &#123; lazyLoadObserver.observe(img) &#125;);</span><br></pre></td></tr></table></figure><p>到此，基本功能已经实现了，可以看到代码非常简单，配合相关的框架生成html的方式使用即可，但是经过测验会发现，图片在滚动到<code>viewport</code>中时，会存在较长时间的无图现象，对于用户感知来说，不太友好，因此需要将观察区域进行延伸，修改为如下：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> callback = <span class="function">(<span class="params">entries, observer</span>)=&gt;</span> &#123;</span><br><span class="line">    entries.forEach(<span class="function"><span class="params">entry</span> =&gt;</span> &#123;</span><br><span class="line">        entry.target.src = entry.target.dataset.src;</span><br><span class="line">        observer.unobserve(entry.target);<span class="comment">// 取消观察</span></span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">const</span> lazyLoadObserver = <span class="keyword">new</span> IntersectionObserver(callback,&#123;rootMargin:<span class="string">"-50px 0 -50px 0"</span>&#125;);</span><br><span class="line"><span class="built_in">document</span>.querySelectorAll(<span class="string">'[data-lazyload]'</span>).forEach(<span class="function"><span class="params">img</span> =&gt;</span> &#123; lazyLoadObserver.observe(img) &#125;);</span><br></pre></td></tr></table></figure><p>添加<code>rootMargin</code>参数，将观察区域相对于<code>root</code>进行放大，滚动时，当图片元素具体可视区域上或者下50px的位置时即可触发观察回调，此时立即进行图片加载，在一定的程度上，当用户将该图片滚动到可视区域中时，可能已经加载完成；具体的偏移值需要根据图片服务情况及用户网络情况确定。<br>将上述代码用于项目中会发现，部分环境<code>IntersectionObserver</code>报错，这是由于兼容性造成，<a href="/e4278974/" title="Observer">Observer</a>中详细介绍了其兼容性并提供了<code>polyfill</code>方案，其<code>polyfill</code>和下面第二种方案类似。</p><h2 id="方案二：onscroll-getComputedStyle"><a href="#方案二：onscroll-getComputedStyle" class="headerlink" title="方案二：onscroll + getComputedStyle"></a>方案二：onscroll + getComputedStyle</h2><p>传统js中判断元素与可视区域之间的位置关系用<code>getBoundingClientRect</code>API 来实现，因此，我们可以使用<code>轮询判断</code>的方式去进行元素探测，使用<code>onscroll</code>+<code>getBoundingClientRect</code>实现该功能：</p><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> imgs = <span class="built_in">document</span>.querySelectorAll(<span class="string">'[data-lazyload]'</span>);</span><br><span class="line"><span class="keyword">const</span> callback = <span class="function"><span class="params">()</span>=&gt;</span> &#123;</span><br><span class="line">    imgs.forEach(<span class="function">(<span class="params">img:HTMLImageElement</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span>(!img.src)&#123;</span><br><span class="line">            <span class="keyword">const</span> position = img.getBoundingClientRect();</span><br><span class="line">            <span class="keyword">if</span>(position.bottom&gt;=<span class="number">-50</span>||position&lt;=<span class="built_in">window</span>.innerHeight+<span class="number">50</span>)&#123;</span><br><span class="line">                img.src = img.dataset.src;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">"scroll"</span>,callback);</span><br></pre></td></tr></table></figure><p>代码相当简单，但是<code>并不实用</code>，主要存在以下问题：<br>    - <code>onscroll</code>触发太过频繁，每次触发都去进行dom List的遍历，开销很大<br>    - <code>getBoundingClientRect</code>容易造成浏览器重绘<br>    - <code>onscroll</code>在IOS中并不会频繁触发，只在开始和结束触发一次</p><p>根据以上问题，需要对此进行优化：<br>    - 通过<code>throttle</code>或<code>debounce</code>优化<code>onscroll</code>的频繁触发<br>    - 当<code>onscroll</code>触发不正常时，即判断IOS环境，使用<code>requestAnimationFrame</code>无限轮询代替<code>onscroll</code><br>优化代码此处不作提现，经过上面的优化，该方案可用性才明显提升。</p><h2 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h2><ul><li>image 初始不要设置src属性，即使设置为<code>&quot;&quot;</code>或者<code>undefined</code>也不要，可能会造成重复载入，不同浏览器行为不一致</li></ul><h2 id="其他优化"><a href="#其他优化" class="headerlink" title="其他优化"></a>其他优化</h2><ul><li>通过滚动距离进行节流</li><li>滚动暂停时才开始触发探测回调</li></ul><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>常见的一下lazyload插件主要采用的是方案二的方式，只是或多或少在此基础上做了进一步优化，但是其效率仍然比不上方案一，建议使用方案一，实在不兼容的情况下使用方案二。</p>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;h2 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h2&gt;&lt;p&gt;随着H5页面图片资源的丰富，首屏页面加载效率受到明显限制，因此优化图片加载成为一个重要的需求，而图片的优化，除了压缩、缓存外，还有一个重要的
-      
-    
-    </summary>
-    
-    
-      <category term="h5" scheme="https://blog.yanxlg.cn/categories/h5/"/>
-    
-      <category term="lib" scheme="https://blog.yanxlg.cn/categories/h5/lib/"/>
-    
-    
-      <category term="h5" scheme="https://blog.yanxlg.cn/tags/h5/"/>
-    
-      <category term="lib" scheme="https://blog.yanxlg.cn/tags/lib/"/>
-    
-      <category term="lazyload" scheme="https://blog.yanxlg.cn/tags/lazyload/"/>
     
   </entry>
   

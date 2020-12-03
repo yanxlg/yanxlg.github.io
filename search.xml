@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>Page Components Design</title>
+      <link href="/210ae7d9/"/>
+      <url>/210ae7d9/</url>
+      
+        <content type="html"><![CDATA[<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>为了实现快速生成多元化、多样化的网站，实现站点风格、元素自定义，从而解决UI相似，第三方平台通过相似度算法进行封站等问题。</p><h2 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h2><ul><li>考虑点<ol><li>组件化设计</li><li>性能问题</li><li>页面编辑器设计</li><li>框架选型</li><li>附加服务</li><li>窗口数据、状态同步</li></ol></li><li>技术设计</li></ul><ol><li>项目架构<img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/210ae7d9/1.png" class="" title="架构图"></li></ol><ul><li>全局配置管理：用于管理站点全局配置，页面共享配置，网站公共api，站点数据管理层。</li><li>Pages：页面层，Page组件，用于组装页面组件列表，调用组件api，获取初始数据，实现页面服务端渲染。</li><li>组件：组件库，用于互相组合形成页面。</li><li>数据：每个组件拥有自己的api，进行异步调用，通过h2复用及reconnect解决创建链接问题，同时解决服务端同步取数据造成的性能问题。</li><li>底层支撑：整个项目将使用到React、Preact、Nextjs、Nestjs、Jest、Typescript。PC端使用React，移动端使用Preact，通过plugin自动转换，实现开发过程无差别化，开发过程基于React开发，移动端使用Preact代替React能有效减少lib的体积；Nestjs 用于实现服务端渲染；Nestjs 作为Node环境框架，配合Nextjs实现服务端渲染系统，同时提供部分附加服务；Jest用于开发组件<code>UI Test</code> 及 <code>Unit Test</code>代码，组件及lib测试覆盖率必须达到<code>85%</code>以上；Typescript作为开发语言，严格限制代码规范，不符合规范的代码不允许提交。</li></ul><ol start="2"><li><p>系统结构</p><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/210ae7d9/4.png" class="" title="系统结构图"><ol><li>AppContext、Page、PageContext、PageContent 层都属于系统封装，不提供开发人员直接修改。PageContent支持开发人员处理声明周期事件，允许开发人员在其不同生命周期中实现打点、preload等逻辑。</li><li>组件在组件库中开发、发布、Unit Test、Ui Test、在h5和PC项目中根据配置进行动态倒入组件</li><li>组件拥有版本号属性，进行版本控制，结构如下：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">compponentA/</span><br><span class="line">├── version1.0</span><br><span class="line">│   ├── .less</span><br><span class="line">│   ├── .tsx</span><br><span class="line">│   ├── .test.tsx</span><br><span class="line">│   └── .yaml</span><br></pre></td></tr></table></figure></li></ol><ul><li>.less：组件样式文件</li><li>.tsx：组件内容文件</li><li>.test.tsx：Unit Test、UI Test文件，执行Jest时会遍历每个组件下该文件，进行检测并计算覆盖率</li><li>.yaml：组件属性及配置定义，用于编辑系统中生成JsonForm</li><li>组件需要支持<code>QTP</code>标记，为自动化测试提供基础</li></ul></li><li><p>ssr流程</p><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/210ae7d9/3.png" class="" title="ssr流程图"><ul><li>Node服务获取网站组件静态配置，通过api获取会比较慢，发生修改需要通知Node进行缓存（memory或redis）,调用缓存中的配置进行服务端渲染，并通过<code>注水</code>完成客户端同构</li><li>遍历组件列表，调用组件<code>getServerSideProps</code>方法获取initData，生成html，并脱水后返回给浏览器</li><li>客户端注水，完成框架同构</li><li>路由切换由客户端处理渲染逻辑，根据下一页面组件配置数据生成骨架屏页面，并由客户端发起api请求</li></ul></li><li><p>完整流程</p><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/210ae7d9/2.png" class="" title="完整流程"><ul><li>ssr需要根据国家、语言、货币等key进行缓存，如商品列表页面添加缓存的同时需要确保列表支持<code>商品重复检测</code>，不显示重复商品，因缓存数据可能更新不及时，加载下一页时数据可能会重复。</li><li>PWA在PC和h5中都需要使用，最基本用于实现强缓存框架类文件。组件及业务代码也可缓存，编译时如文件发生变化，须改变生成文件名，文件名生成通过文件内容hash8生成</li></ul></li></ol><h2 id="优化分析"><a href="#优化分析" class="headerlink" title="优化分析"></a>优化分析</h2><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/210ae7d9/5.jpg" class="" title="优化分析"><p>性能问题及相关解决方案基本参照上述思维导图即可进行优化，在开发过程中需要严格按照相应要求进行开发。</p><h2 id="附加服务"><a href="#附加服务" class="headerlink" title="附加服务"></a>附加服务</h2><ol><li>性能分析服务：目前网站打点托管于vova打点系统，数据无法获取，不便与进行分析及调优，需要开发独立的性能分析服务，客户端上传相关性能指标，服务器端进行收集分析，后续可通过相关分析数据进行自动调优</li></ol><h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><ol><li>页面编辑器设计：参考另外专项设计文档</li><li><code>窗口数据、状态同步</code>：开发PC时根据需要待定</li><li><code>缓存方案</code>：参考另外设计文档（待定）</li></ol>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> react </tag>
+            
+            <tag> design </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>node 自动切换</title>
       <link href="/fbeb4634/"/>
       <url>/fbeb4634/</url>
@@ -523,31 +544,6 @@
     
     
     <entry>
-      <title>React 服务端渲染</title>
-      <link href="/1b5b7ecc/"/>
-      <url>/1b5b7ecc/</url>
-      
-        <content type="html"><![CDATA[<div id="hexo-blog-encrypt" data-wpm="密码错误，请输入正确的密码." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <div class="hbe-input-container">  <input type="password" id="hbePass" placeholder="" />    <label for="hbePass">本文暂不开放，需要密码才可阅读.</label>    <div class="bottom-line"></div>  </div>  <script id="hbeData" type="hbeData" data-hmacdigest="57c4f9a7d4e3f11ce550b0f899689c3cd37b4f09777bfccc63201415fa7bf73f">9862ab3682ec9eb250517d78be2f804b</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
-      
-      
-      <categories>
-          
-          <category> react </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> react </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>React</title>
       <link href="/dee17c46/"/>
       <url>/dee17c46/</url>
@@ -578,6 +574,31 @@
       <url>/963d3ca1/</url>
       
         <content type="html"><![CDATA[<div id="hexo-blog-encrypt" data-wpm="密码错误，请输入正确的密码." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <div class="hbe-input-container">  <input type="password" id="hbePass" placeholder="" />    <label for="hbePass">本文暂不开放，需要密码才可阅读.</label>    <div class="bottom-line"></div>  </div>  <script id="hbeData" type="hbeData" data-hmacdigest="383fb8f2ea5171219c3bf81b75a9c3ce1209c6e8117fbac3aa9ed296541e2360">efa047241e971872ecd0778527c664b1</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
+      
+      
+      <categories>
+          
+          <category> react </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> react </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>React 服务端渲染</title>
+      <link href="/1b5b7ecc/"/>
+      <url>/1b5b7ecc/</url>
+      
+        <content type="html"><![CDATA[<div id="hexo-blog-encrypt" data-wpm="密码错误，请输入正确的密码." data-whm="OOPS, these decrypted content may changed, but you can still have a look.">  <div class="hbe-input-container">  <input type="password" id="hbePass" placeholder="" />    <label for="hbePass">本文暂不开放，需要密码才可阅读.</label>    <div class="bottom-line"></div>  </div>  <script id="hbeData" type="hbeData" data-hmacdigest="57c4f9a7d4e3f11ce550b0f899689c3cd37b4f09777bfccc63201415fa7bf73f">9862ab3682ec9eb250517d78be2f804b</script></div><script src="/lib/blog-encrypt.js"></script><link href="/css/blog-encrypt.css" rel="stylesheet" type="text/css">]]></content>
       
       
       <categories>

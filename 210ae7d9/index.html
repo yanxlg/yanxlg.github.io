@@ -1,0 +1,179 @@
+<!DOCTYPE html><html lang="en" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Page Components Design | yanxlg@blog</title><meta name="description" content="需求为了实现快速生成多元化、多样化的网站，实现站点风格、元素自定义，从而解决UI相似，第三方平台通过相似度算法进行封站等问题。 设计 考虑点 组件化设计 性能问题 页面编辑器设计 框架选型 附加服务 窗口数据、状态同步   技术设计   项目架构   全局配置管理：用于管理站点全局配置，页面共享配置，网站公共api，站点数据管理层。 Pages：页面层，Page组件，用于组装页面组件列表，调用组件"><meta name="keywords" content="react,design"><meta name="author" content="yanxlg"><meta name="copyright" content="yanxlg"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="dns-prefetch" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin="crossorigin"/><link rel="dns-prefetch" href="https://fonts.googleapis.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="dns-prefetch" href="//busuanzi.ibruce.info"/><meta name="baidu-site-verification" content="cg1zWFKfJ7"/><meta name="twitter:card" content="summary"><meta name="twitter:title" content="Page Components Design"><meta name="twitter:description" content="需求为了实现快速生成多元化、多样化的网站，实现站点风格、元素自定义，从而解决UI相似，第三方平台通过相似度算法进行封站等问题。 设计 考虑点 组件化设计 性能问题 页面编辑器设计 框架选型 附加服务 窗口数据、状态同步   技术设计   项目架构   全局配置管理：用于管理站点全局配置，页面共享配置，网站公共api，站点数据管理层。 Pages：页面层，Page组件，用于组装页面组件列表，调用组件"><meta name="twitter:image" content="https://blog.yanxlg.cn/images/bg.jpeg"><meta property="og:type" content="article"><meta property="og:title" content="Page Components Design"><meta property="og:url" content="https://blog.yanxlg.cn/210ae7d9/"><meta property="og:site_name" content="yanxlg@blog"><meta property="og:description" content="需求为了实现快速生成多元化、多样化的网站，实现站点风格、元素自定义，从而解决UI相似，第三方平台通过相似度算法进行封站等问题。 设计 考虑点 组件化设计 性能问题 页面编辑器设计 框架选型 附加服务 窗口数据、状态同步   技术设计   项目架构   全局配置管理：用于管理站点全局配置，页面共享配置，网站公共api，站点数据管理层。 Pages：页面层，Page组件，用于组装页面组件列表，调用组件"><meta property="og:image" content="https://blog.yanxlg.cn/images/bg.jpeg"><meta property="article:published_time" content="2020-12-02T11:09:14.000Z"><meta property="article:modified_time" content="2020-12-03T05:26:29.632Z"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>var autoChangeMode = '1'
+var t = Cookies.get("theme")
+if (autoChangeMode == '1'){
+  var isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+  var isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+  var isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+  var hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+  if (t === undefined){
+    if (isLightMode) activateLightMode()
+    else if (isDarkMode) activateDarkMode()
+    else if (isNotSpecified || hasNoSupport){
+      console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+      var now = new Date()
+      var hour = now.getHours()
+      var isNight = hour < 6 || hour >= 18
+      isNight ? activateDarkMode() : activateLightMode()
+  }
+  } else if (t == 'light') activateLightMode()
+  else activateDarkMode()
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="https://blog.yanxlg.cn/210ae7d9/"><link rel="next" title="node 自动切换" href="https://blog.yanxlg.cn/fbeb4634/"><link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.css"><script src="https://cdn.jsdelivr.net/npm/gitalk@latest/dist/gitalk.min.js"></script><script src="https://cdn.jsdelivr.net/npm/blueimp-md5/js/md5.min.js"></script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"We didn't find any results for the search: ${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  copy: {
+    success: 'Copy successfully',
+    error: 'Copy error',
+    noSupport: 'The browser does not support'
+  },
+  bookmark: {
+    message_prev: 'Press',
+    message_next: 'to bookmark this page'
+  },
+  runtime_unit: 'days',
+  runtime: true,
+  copyright: {"languages":{"author":"Author: yanxlg","link":"Link: ","source":"Source: yanxlg@blog","info":"Copyright is owned by the author. For commercial reprints, please contact the author for authorization. For non-commercial reprints, please indicate the source."}},
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: true,
+  highlightCopy: true,
+  highlightLang: true,
+  highlightShrink: 'false',
+  isFontAwesomeV5: false,
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: true
+  
+}</script><script>var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isSidebar: true  
+  }</script><noscript><style>
+#page-header {
+  opacity: 1
+}
+.justified-gallery img{
+  opacity: 1
+}
+</style></noscript><link rel="stylesheet" href="/custom.css"><script src="/custom.js"><!-- 增加performance--><script src="/js/performance.js"></script><meta name="generator" content="Hexo 4.2.1"><link rel="alternate" href="/atom.xml" title="yanxlg@blog" type="application/atom+xml">
+</head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">Loading...</div></div></div><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/images/avatar.svg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">Articles</div><div class="length_num">58</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">Tags</div><div class="length_num">47</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">Categories</div><div class="length_num">23</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/categories/react/"><i class="fa-fw blog-icon icon-react"></i><span> React</span></a></li><li><a class="site-page" href="/categories/vue/"><i class="fa-fw blog-icon icon-vue"></i><span> Vue</span></a></li><li><a class="site-page" href="/categories/nodejs/"><i class="fa-fw blog-icon icon-node"></i><span> Nodejs</span></a></li></ul></div></div></div></div><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">Catalog</div><div class="sidebar-toc__progress"><span class="progress-notice">You've read</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#需求"><span class="toc-number">1.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设计"><span class="toc-number">2.</span> <span class="toc-text">设计</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#优化分析"><span class="toc-number">3.</span> <span class="toc-text">优化分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#附加服务"><span class="toc-number">4.</span> <span class="toc-text">附加服务</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#遗留问题"><span class="toc-number">5.</span> <span class="toc-text">遗留问题</span></a></li></ol></div></div></div><div id="body-wrap"><div class="post-bg" id="nav" style="background-image: url(/images/bg.jpeg)"><div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">yanxlg@blog</a></span><span class="pull_right menus"><div id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> Search</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> Tags</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> Categories</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-list" aria-hidden="true"></i><span> List</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/categories/react/"><i class="fa-fw blog-icon icon-react"></i><span> React</span></a></li><li><a class="site-page" href="/categories/vue/"><i class="fa-fw blog-icon icon-vue"></i><span> Vue</span></a></li><li><a class="site-page" href="/categories/nodejs/"><i class="fa-fw blog-icon icon-node"></i><span> Nodejs</span></a></li></ul></div></div><span class="toggle-menu close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span></span></div><div id="post-info"><div id="post-title"><div class="posttitle">Page Components Design</div></div><div id="post-meta"><div class="meta-firstline"><time class="post-meta__date"><span class="post-meta__date-created" title="Created 2020-12-02 19:09:14"><i class="fa fa-calendar" aria-hidden="true"></i> Created 2020-12-02</span><span class="post-meta__separator">|</span><span class="post-meta__date-updated" title="Updated 2020-12-03 13:26:29"><i class="fa fa-history" aria-hidden="true"></i> Updated 2020-12-03</span></time></div><div class="meta-secondline"> <span class="post-meta-wordcount"><i class="post-meta__icon fa fa-file-word-o" aria-hidden="true"></i><span>Word count:</span><span class="word-count">1.1k</span><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-clock-o" aria-hidden="true"></i><span>Reading time: 3 min</span></span></div><div class="meta-thirdline"><span class="post-meta-pv-cv"><span class="post-meta__separator">|</span><i class="fa fa-eye post-meta__icon" aria-hidden="true"> </i><span>Post View:</span><span id="busuanzi_value_page_pv"></span></span><span class="post-meta-commentcount"><span class="post-meta__separator">|</span><i class="post-meta__icon fa fa-comment-o" aria-hidden="true"></i><span>Comments:</span><a href="/210ae7d9/#post-comment"><span class="gitalk-comment-count comment-count"></span></a></span></div></div></div></div><main class="layout_post" id="content-inner"><article id="post"><div class="post-content" id="article-container"><h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>为了实现快速生成多元化、多样化的网站，实现站点风格、元素自定义，从而解决UI相似，第三方平台通过相似度算法进行封站等问题。</p>
+<h2 id="设计"><a href="#设计" class="headerlink" title="设计"></a>设计</h2><ul>
+<li>考虑点<ol>
+<li>组件化设计</li>
+<li>性能问题</li>
+<li>页面编辑器设计</li>
+<li>框架选型</li>
+<li>附加服务</li>
+<li>窗口数据、状态同步</li>
+</ol>
+</li>
+<li>技术设计</li>
+</ul>
+<ol>
+<li>项目架构<img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/210ae7d9/1.png" class="" title="架构图"></li>
+</ol>
+<ul>
+<li>全局配置管理：用于管理站点全局配置，页面共享配置，网站公共api，站点数据管理层。</li>
+<li>Pages：页面层，Page组件，用于组装页面组件列表，调用组件api，获取初始数据，实现页面服务端渲染。</li>
+<li>组件：组件库，用于互相组合形成页面。</li>
+<li>数据：每个组件拥有自己的api，进行异步调用，通过h2复用及reconnect解决创建链接问题，同时解决服务端同步取数据造成的性能问题。</li>
+<li>底层支撑：整个项目将使用到React、Preact、Nextjs、Nestjs、Jest、Typescript。PC端使用React，移动端使用Preact，通过plugin自动转换，实现开发过程无差别化，开发过程基于React开发，移动端使用Preact代替React能有效减少lib的体积；Nestjs 用于实现服务端渲染；Nestjs 作为Node环境框架，配合Nextjs实现服务端渲染系统，同时提供部分附加服务；Jest用于开发组件<code>UI Test</code> 及 <code>Unit Test</code>代码，组件及lib测试覆盖率必须达到<code>85%</code>以上；Typescript作为开发语言，严格限制代码规范，不符合规范的代码不允许提交。</li>
+</ul>
+<ol start="2">
+<li><p>系统结构</p>
+<img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/210ae7d9/4.png" class="" title="系统结构图">
+<ol>
+<li>AppContext、Page、PageContext、PageContent 层都属于系统封装，不提供开发人员直接修改。PageContent支持开发人员处理声明周期事件，允许开发人员在其不同生命周期中实现打点、preload等逻辑。</li>
+<li>组件在组件库中开发、发布、Unit Test、Ui Test、在h5和PC项目中根据配置进行动态倒入组件</li>
+<li>组件拥有版本号属性，进行版本控制，结构如下：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">compponentA/</span><br><span class="line">├── version1.0</span><br><span class="line">│   ├── .less</span><br><span class="line">│   ├── .tsx</span><br><span class="line">│   ├── .test.tsx</span><br><span class="line">│   └── .yaml</span><br></pre></td></tr></table></figure></li>
+</ol>
+<ul>
+<li>.less：组件样式文件</li>
+<li>.tsx：组件内容文件</li>
+<li>.test.tsx：Unit Test、UI Test文件，执行Jest时会遍历每个组件下该文件，进行检测并计算覆盖率</li>
+<li>.yaml：组件属性及配置定义，用于编辑系统中生成JsonForm</li>
+<li>组件需要支持<code>QTP</code>标记，为自动化测试提供基础</li>
+</ul>
+</li>
+<li><p>ssr流程</p>
+<img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/210ae7d9/3.png" class="" title="ssr流程图">
+<ul>
+<li>Node服务获取网站组件静态配置，通过api获取会比较慢，发生修改需要通知Node进行缓存（memory或redis）,调用缓存中的配置进行服务端渲染，并通过<code>注水</code>完成客户端同构</li>
+<li>遍历组件列表，调用组件<code>getServerSideProps</code>方法获取initData，生成html，并脱水后返回给浏览器</li>
+<li>客户端注水，完成框架同构</li>
+<li>路由切换由客户端处理渲染逻辑，根据下一页面组件配置数据生成骨架屏页面，并由客户端发起api请求</li>
+</ul>
+</li>
+<li><p>完整流程</p>
+<img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/210ae7d9/2.png" class="" title="完整流程">
+<ul>
+<li>ssr需要根据国家、语言、货币等key进行缓存，如商品列表页面添加缓存的同时需要确保列表支持<code>商品重复检测</code>，不显示重复商品，因缓存数据可能更新不及时，加载下一页时数据可能会重复。</li>
+<li>PWA在PC和h5中都需要使用，最基本用于实现强缓存框架类文件。组件及业务代码也可缓存，编译时如文件发生变化，须改变生成文件名，文件名生成通过文件内容hash8生成</li>
+</ul>
+</li>
+</ol>
+<h2 id="优化分析"><a href="#优化分析" class="headerlink" title="优化分析"></a>优化分析</h2><img src= data:image/gif;base64,R0lGODdhAQABAPAAAMPDwwAAACwAAAAAAQABAAACAkQBADs= data-src="/210ae7d9/5.jpg" class="" title="优化分析">
+<p>性能问题及相关解决方案基本参照上述思维导图即可进行优化，在开发过程中需要严格按照相应要求进行开发。</p>
+<h2 id="附加服务"><a href="#附加服务" class="headerlink" title="附加服务"></a>附加服务</h2><ol>
+<li>性能分析服务：目前网站打点托管于vova打点系统，数据无法获取，不便与进行分析及调优，需要开发独立的性能分析服务，客户端上传相关性能指标，服务器端进行收集分析，后续可通过相关分析数据进行自动调优</li>
+</ol>
+<h2 id="遗留问题"><a href="#遗留问题" class="headerlink" title="遗留问题"></a>遗留问题</h2><ol>
+<li>页面编辑器设计：参考另外专项设计文档</li>
+<li><code>窗口数据、状态同步</code>：开发PC时根据需要待定</li>
+<li><code>缓存方案</code>：参考另外设计文档（待定）</li>
+</ol>
+</div><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">Author: </span><span class="post-copyright-info"><a href="mailto:undefined">yanxlg</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">Link: </span><span class="post-copyright-info"><a href="https://blog.yanxlg.cn/210ae7d9/">https://blog.yanxlg.cn/210ae7d9/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">Copyright Notice: </span><span class="post-copyright-info">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> unless stating additionally.</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/react/">react</a><a class="post-meta__tags" href="/tags/design/">design</a></div><div class="post_share"><div class="social-share" data-image="/images/bg.jpeg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"/><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> Donate<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="post-qr-code__img" src="/images/wechat.png" alt="微信"/><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="post-qr-code__img" src="/images/alipay.png" alt="支付宝"/><div class="post-qr-code__desc">支付宝</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="next-post pull-full"><a href="/fbeb4634/"><img class="next_cover" data-src="/images/bg.jpeg" onerror="onerror=null;src='/img/404.jpg'"><div class="pagination-info"><div class="label">Next Post</div><div class="next_info">node 自动切换</div></div></a></div></nav><div class="relatedPosts"><div class="relatedPosts_headline"><i class="fa fa-fw fa-thumbs-up" aria-hidden="true"></i><span> Recommend</span></div><div class="relatedPosts_list"><div class="relatedPosts_item"><a href="/dee17c46/" title="React"><img class="relatedPosts_cover" data-src="/images/top/react.jpeg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2019-09-20</div><div class="relatedPosts_title">React</div></div></a></div><div class="relatedPosts_item"><a href="/5a8a6c8d/" title="权限设计"><img class="relatedPosts_cover" data-src="/images/bg.jpeg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2020-07-11</div><div class="relatedPosts_title">权限设计</div></div></a></div><div class="relatedPosts_item"><a href="/963d3ca1/" title="React 性能优化"><img class="relatedPosts_cover" data-src="/images/bg.jpeg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2019-09-20</div><div class="relatedPosts_title">React 性能优化</div></div></a></div><div class="relatedPosts_item"><a href="/1b5b7ecc/" title="React 服务端渲染"><img class="relatedPosts_cover" data-src="/images/bg.jpeg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2019-09-20</div><div class="relatedPosts_title">React 服务端渲染</div></div></a></div><div class="relatedPosts_item"><a href="/9bcaf31a/" title="Call setState when unMounted"><img class="relatedPosts_cover" data-src="/images/bg.jpeg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2019-03-20</div><div class="relatedPosts_title">Call setState when unMounted</div></div></a></div><div class="relatedPosts_item"><a href="/5c7548aa/" title="React 模块化服务端渲染"><img class="relatedPosts_cover" data-src="/images/bg.jpeg"><div class="relatedPosts_main is-center"><div class="relatedPosts_date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 2018-09-20</div><div class="relatedPosts_title">React 模块化服务端渲染</div></div></a></div></div><div class="clear_both"></div></div><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> Comment</span></div><div id="gitalk-container"></div><script>var gitalk = new Gitalk({
+  clientID: '12a1217ff53b08c6c73a',
+  clientSecret: '7ee99a0195d3d7837a04a7eeb423f98c960d9f60',
+  repo: 'yanxlg.github.io',
+  owner: 'yanxlg',
+  admin: ['yanxlg'],
+  id: md5(decodeURI(location.pathname)),
+  language: 'zh-CN',
+  perPage: 10,
+  distractionFreeMode: false,
+  pagerDirection: 'last',
+  createIssueManually: false,
+  updateCountCallback: commentCount
+})
+gitalk.render('gitalk-container')
+
+function commentCount(n){
+  try {
+    document.getElementsByClassName('gitalk-comment-count')[0].innerHTML= n
+  } catch (e) {
+    return false
+  }
+}</script></div></article></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2020 By yanxlg</div><div class="framework-info"><span>Driven </span><a href="https://hexo.io" target="_blank" rel="noopener"><span>Hexo</span></a><span class="footer-separator">|</span><span>Theme </span><a href="https://github.com/jerryc127/hexo-theme-butterfly" target="_blank" rel="noopener"><span>Butterfly</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="Read Mode"></i><i class="fa fa-plus" id="font_plus" title="Increase font size"></i><i class="fa fa-minus" id="font_minus" title="Decrease font size"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="Traditional Chinese and Simplified Chinese Conversion" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="Dark Mode"></i></div><div id="rightside-config-show"><div id="rightside_config" title="Setting"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="Scroll to comment"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="Table of Contents" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="Back to top" aria-hidden="true"></i></div></section><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">Local search</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="Search for Posts" type="text"/></div></div></div><hr/><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>Powered by</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="150" mobile="false" src="/js/third-party/canvas-nest.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lozad/dist/lozad.min.js"></script><script src="/js/third-party/click_heart.js"></script><script src="/js/search/local-search.js"></script><script>var endLoading = function () {
+  document.body.style.overflow = 'auto';
+  document.getElementById('loading-box').classList.add("loaded")
+}
+window.addEventListener('load',endLoading)</script></body></html>
